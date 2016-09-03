@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">PictureSelectorLibrary</string>
+    <string name="ps_review">预览</string>
+    <string name="ps_title_pic">图片</string>
+    <string name="ps_ensure">完成</string>
+    <string name="ps_all_image">所有图片</string>
+    <string name="ps_max_count_tips">你最多只能选择%1$s张照片</string>
+</resources>

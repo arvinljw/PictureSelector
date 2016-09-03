@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/spacing_small"
+    android:paddingRight="@dimen/spacing_small"
+    android:paddingTop="@dimen/spacing_small">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <net.arvin.pictureselector.views.FolderLayout
+            android:id="@+id/layout_img"
+            android:layout_width="@dimen/spacing_eighty"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_first"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ps_img_loading" />
+        </net.arvin.pictureselector.views.FolderLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/spacing_small"
+            android:layout_toRightOf="@id/layout_img"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_file_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="name"
+                android:textColor="@color/black_normal"
+                android:textSize="@dimen/txt_big_content" />
+
+            <TextView
+                android:id="@+id/tv_file_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:text="1"
+                android:textColor="@color/black_secondary"
+                android:textSize="@dimen/txt_normal_content" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_selected"
+            android:layout_width="@dimen/spacing_twenty_four"
+            android:layout_height="@dimen/spacing_twenty_four"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ps_checked" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_divider"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:background="@color/black_divider" />
+
+</LinearLayout>

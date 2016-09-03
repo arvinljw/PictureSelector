@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--间距常用大小-->
+    <dimen name="spacing_divider">0.5dp</dimen>
+    <dimen name="spacing_one">1dp</dimen>
+    <dimen name="spacing_two">2dp</dimen>
+    <dimen name="spacing_four">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_twelve">12dp</dimen>
+    <dimen name="spacing_default">16dp</dimen>
+    <dimen name="spacing_twenty_four">24dp</dimen>
+    <dimen name="spacing_thirty_two">32dp</dimen>
+    <dimen name="spacing_avatar">40dp</dimen>
+    <dimen name="spacing_tab_bar">48dp</dimen>
+    <dimen name="spacing_app_bar">56dp</dimen>
+    <dimen name="spacing_float_btn">64dp</dimen>
+    <dimen name="spacing_eighty">80dp</dimen>
+    <dimen name="spacing_ninety_six">96dp</dimen>
+
+    <!--文字常用大小-->
+    <dimen name="txt_small">10sp</dimen>
+    <dimen name="txt_tips">12sp</dimen>
+    <dimen name="txt_normal_content">14sp</dimen>
+    <dimen name="txt_big_content">16sp</dimen>
+    <dimen name="txt_sub_title">18sp</dimen>
+    <dimen name="txt_title">20sp</dimen>
+    <dimen name="txt_larger_title">24sp</dimen>
+</resources>

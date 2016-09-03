@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <net.arvin.pictureselector.views.SquareImageView
+        android:id="@+id/img_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.8"
+        android:scaleType="centerCrop"
+        android:src="@color/colorPrimaryDark" />
+
+    <FrameLayout
+        android:id="@+id/layout_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/spacing_four">
+
+        <ImageView
+            android:id="@+id/img_selector"
+            android:layout_width="@dimen/spacing_default"
+            android:layout_height="@dimen/spacing_default"
+            android:src="@drawable/ps_checkbox_bg" />
+    </FrameLayout>
+
+</RelativeLayout>

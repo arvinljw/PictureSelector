@@ -1,0 +1,28 @@
+apply plugin: 'com.android.application'
+
+android {
+    def globalConfig = rootProject.ext.android
+    compileSdkVersion globalConfig.compileSdkVersion as int
+    buildToolsVersion globalConfig.buildToolsVersion as String
+
+    defaultConfig {
+        minSdkVersion globalConfig.minSdkVersion as int
+        targetSdkVersion globalConfig.targetSdkVersion as int
+        versionCode globalConfig.versionCode as int
+        versionName globalConfig.versionName as String
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def googleDependencies = rootProject.ext.dependencies.googleSupportVersion
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile "com.android.support:appcompat-v7:${googleDependencies}"
+    compile project(':pictureselectorlibrary')
+}

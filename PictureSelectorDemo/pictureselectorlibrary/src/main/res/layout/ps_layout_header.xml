@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/layout_header"
+    android:layout_height="@dimen/spacing_tab_bar"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/spacing_default"
+        android:paddingRight="@dimen/spacing_default"
+        android:src="@drawable/ps_back_white" />
+
+    <View
+        android:id="@+id/is_divider_line"
+        android:layout_width="@dimen/spacing_one"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/spacing_default"
+        android:background="@color/colorPrimaryDark" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:text="@string/ps_title_pic"
+        android:textColor="@color/white_normal"
+        android:textSize="@dimen/txt_title" />
+
+    <TextView
+        android:id="@+id/tv_ensure"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/spacing_twelve"
+        android:paddingLeft="@dimen/spacing_default"
+        android:paddingRight="@dimen/spacing_default"
+        android:gravity="center"
+        android:enabled="false"
+        android:text="@string/ps_ensure"
+        android:textColor="@drawable/ps_ensure_btn_text_color"
+        android:textSize="@dimen/txt_normal_content"
+        android:background="@drawable/ps_ensure_btn_bg"
+        />
+
+</LinearLayout>
