@@ -68,6 +68,7 @@ public class PictureSelectorActivity extends AppCompatActivity {
         Intent data = new Intent();
         data.putParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED, selectedImage);
         setResult(RESULT_OK, data);
+        finish();
     }
 
     /**

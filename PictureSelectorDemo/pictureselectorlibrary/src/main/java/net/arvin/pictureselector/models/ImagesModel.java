@@ -3,6 +3,8 @@ package net.arvin.pictureselector.models;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 
 import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.entities.ImageFolderEntity;
@@ -15,6 +17,7 @@ import java.util.Map;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
@@ -157,5 +160,4 @@ public class ImagesModel {
     private static String[] getSupportMineTypes() {
         return new String[]{"image/jpeg", "image/png"};
     }
-
 }

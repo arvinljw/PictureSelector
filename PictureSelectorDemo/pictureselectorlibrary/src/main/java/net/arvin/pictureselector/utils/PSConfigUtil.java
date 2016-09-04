@@ -1,5 +1,14 @@
 package net.arvin.pictureselector.utils;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+import net.arvin.pictureselector.entities.ImageEntity;
+import net.arvin.pictureselector.uis.PictureSelectorActivity;
+
+import java.util.ArrayList;
+
 /**
  * created by arvin on 16/8/30 22:36
  * email：1035407623@qq.com
@@ -85,6 +94,9 @@ public class PSConfigUtil {
         return canCrop;
     }
 
+    /**
+     * @param canCrop 只有当maxCount == 1时有效
+     */
     public PSConfigUtil setCanCrop(boolean canCrop) {
         this.canCrop = canCrop;
         return getInstance();
@@ -99,11 +111,36 @@ public class PSConfigUtil {
         return mSelectedCount;
     }
 
+    public PSConfigUtil setSelectedCount(int count) {
+        mSelectedCount = count;
+        return getInstance();
+    }
+
     public int getSelectedFolderPos() {
         return mSelectedFolderPos;
     }
 
     public void setSelectedFolderPos(int selectedFolderPos) {
         this.mSelectedFolderPos = selectedFolderPos;
+    }
+
+    public void showSelector(Activity activity, int requestCode, ArrayList<ImageEntity> selectedImages) {
+        Intent intent = new Intent(activity, PictureSelectorActivity.class);
+        if (selectedImages != null) {
+            intent.putParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED, selectedImages);
+        }
+        activity.startActivityForResult(intent, requestCode);
+    }
+
+    public void showSelector(Activity activity, int requestCode) {
+        showSelector(activity, requestCode, null);
+    }
+
+    /**
+     * 清除缓存:包含裁剪的图片和通过PictureSelector拍照所得的图片
+     */
+    public static void clearCache() {
+        PSCropUtil.clear();
+        PSTakePhotoUtil.clear();
     }
 }

@@ -6,6 +6,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import java.io.File;
@@ -27,17 +28,11 @@ public class PSTakePhotoUtil {
 
     @SuppressWarnings("ConstantConditions")
     public void initFileDir() {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            try {
-                fileDir = Environment.getExternalStorageDirectory().getAbsolutePath();
-            } catch (NullPointerException e) {
-                fileDir = Environment.getRootDirectory().getAbsolutePath();
-            }
-        } else {
-            fileDir = Environment.getRootDirectory().getAbsolutePath();
-        }
-        fileDir += "/" + PSConstanceUtil.FOLDER_NAME + "/" + PSConstanceUtil.FROM_CAMERA;
+        fileDir = getTakePhotoDir();
+    }
+
+    private static String getTakePhotoDir() {
+        return PSConstanceUtil.getRootDIr() + PSConstanceUtil.FROM_CAMERA;
     }
 
     public void choosePhotoFromCamera() {
@@ -73,10 +68,6 @@ public class PSTakePhotoUtil {
         return intent;
     }
 
-    public interface OnTakePhotoSuccessListener {
-        void onTakePhotoSuccess(String path);
-    }
-
     protected void scanFile(String path) {
         MediaScannerConnection.scanFile(mActivity, new String[]{path},
                 null, new MediaScannerConnection.OnScanCompletedListener() {
@@ -85,5 +76,13 @@ public class PSTakePhotoUtil {
                         Log.i("scanFile", "刷新成功");
                     }
                 });
+    }
+
+    public static void clear() {
+        PSConstanceUtil.clear(getTakePhotoDir());
+    }
+
+    public interface OnTakePhotoSuccessListener {
+        void onTakePhotoSuccess(String path);
     }
 }

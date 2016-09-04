@@ -2,6 +2,7 @@ package net.arvin.pictureselector.uis.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -93,29 +94,56 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
     }
 
     private void loadData() {
+        final ArrayList<ImageEntity> temp = getArguments().getParcelableArrayList(PSConstanceUtil.PASS_SELECTED);
+
         ImagesModel.getImageFolders(getActivity()).subscribe(new Action1<List<ImageFolderEntity>>() {
             @Override
             public void call(List<ImageFolderEntity> imageFolderEntities) {
                 mImageFolders = imageFolderEntities;
                 if (mImageFolders != null && mImageFolders.size() > 0) {
+                    if (temp != null && temp.size() > 0) {
+                        for (ImageEntity entity : mImageFolders.get(0).getImages()) {
+                            for (ImageEntity mSelectedImage : temp) {
+                                if (entity.getPath().equals(mSelectedImage.getPath())) {
+                                    entity.setSelected(true);
+                                    mSelectedImages.add(entity);
+                                    break;
+                                }
+                            }
+                        }
+                    }
                     mItems.addAll(mImageFolders.get(PSConfigUtil.getInstance().getSelectedFolderPos()).getImages());
                 }
                 mAdapter.notifyDataSetChanged();
+                asyncShow(mSelectedImages.size());
             }
         });
     }
 
+    private void asyncSelectedImages() {
+
+    }
+
     @Override
     public void update(Bundle data) {
+        //没有数据表示不裁剪,重新选择图片
+        if (data == null) {
+            return;
+        }
+
         List<ImageEntity> selectedData = data.getParcelableArrayList(PSConstanceUtil.PASS_SELECTED);
+        if (selectedData == null) {
+            selectedData = new ArrayList<>();
+        }
+
         mItems.clear();
         mSelectedImages.clear();
-        mSelectedImages.addAll(selectedData);
 
         for (ImageEntity entity : mImageFolders.get(0).getImages()) {
-            for (ImageEntity mSelectedImage : mSelectedImages) {
+            for (ImageEntity mSelectedImage : selectedData) {
                 if (entity.getPath().equals(mSelectedImage.getPath())) {
                     entity.setSelected(true);
+                    mSelectedImages.add(entity);
                     break;
                 } else {
                     entity.setSelected(false);
@@ -152,7 +180,7 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
         position -= canTakePhoto ? 1 : 0;
         if (!PSConfigUtil.getInstance().canReview()) {
             if (PSConfigUtil.getInstance().isCanCrop()) {
-                // TODO: crop image
+                toCrop(mItems.get(position));
                 return;
             }
             mSelectedImages.add(mItems.get(position));
@@ -160,6 +188,17 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
             return;
         }
         toReview(position, false);
+    }
+
+    /**
+     * @param item 裁剪该图片
+     */
+    private void toCrop(ImageEntity item) {
+        Bundle data = new Bundle();
+        //这是用于显示的数据
+        data.putParcelable(PSConstanceUtil.PASS_SHOW, item);
+        PageChangeEntity entity = new PageChangeEntity(PageChangeEntity.PageId.Crop, data);
+        EventBus.getDefault().post(entity);
     }
 
     /**
@@ -226,6 +265,8 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
     }
 
     private void asyncShow(int selectedCount) {
+        PSConfigUtil.getInstance().setSelectedCount(selectedCount);
+
         boolean enabled = selectedCount > 0;
 
         tvEnsure.setText(getEnsureText(selectedCount));

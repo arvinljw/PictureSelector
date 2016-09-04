@@ -23,7 +23,7 @@ public class PSGlideUtil {
     }
 
     public static void loadImage(Context context, String path, ImageView imageView, RequestListener<String, GlideDrawable> listener) {
-        Glide.with(context).load(path).listener(listener).placeholder(R.color.colorPrimaryDark).error(R.drawable.ps_img_loading).into(imageView);
+        Glide.with(context).load(path).listener(listener).placeholder(android.R.color.black).error(R.drawable.ps_img_loading).into(imageView);
     }
 
 }
