@@ -388,8 +388,8 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
          * Here we decide whether to let the ImageView's parent to start taking
          * over the touch event.
          *
-         * First we check whether this function is enabled. We never want the
-         * parent to take over if we're scaling. We then check the edge we're
+         * First we ps_ic_check whether this function is enabled. We never want the
+         * parent to take over if we're scaling. We then ps_ic_check the edge we're
          * on, and the direction of the scroll (i.e. if we're pulling against
          * the edge, aka 'overscrolling', let the parent take over).
          */
@@ -437,7 +437,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener,
                 final int left = imageView.getLeft();
 
                 /**
-                 * We need to check whether the ImageView's bounds have changed.
+                 * We need to ps_ic_check whether the ImageView's bounds have changed.
                  * This would be easier if we targeted API 11+ as we could just use
                  * View.OnLayoutChangeListener. Instead we have to replicate the
                  * work, keeping track of the ImageView's bounds and then checking

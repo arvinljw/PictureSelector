@@ -33,7 +33,7 @@
                 android:layout_width="@dimen/spacing_default"
                 android:layout_height="@dimen/spacing_default"
                 android:layout_marginRight="@dimen/spacing_small"
-                android:src="@drawable/ps_checkbox_bg" />
+                android:src="@drawable/ps_checked_bg" />
 
             <TextView
                 android:layout_width="wrap_content"
