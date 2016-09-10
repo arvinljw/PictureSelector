@@ -11,7 +11,15 @@
 ## Usage
 1、引用Lib
 
-下载Lib通过引用Module方式引用
+* 下载Lib通过引用Module方式引用
+
+* 在AndroidManifest.xml文件中添加：
+
+```
+<activity
+    android:name="net.arvin.pictureselector.uis.PictureSelectorActivity"
+    android:screenOrientation="portrait" />
+```
 
 2、启动PictureSelector：
 
