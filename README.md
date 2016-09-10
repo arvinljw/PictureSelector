@@ -21,16 +21,30 @@
     android:screenOrientation="portrait" />
 ```
 
-2、启动PictureSelector：
+2、修改默认配置
+
+```
+／／这是默认设置
+PSConfigUtil.getInstance().setCanCrop(false)
+                .setCanTakePhoto(true)
+                .setMaxCount(9);
+```
+* setCanCrop 是否能裁剪，只有maxCount为1时才有效；
+* setCanTakePhoto 是否支持拍照；
+* setMaxCount 设置一次最多可选择图片的数量
+
+3、启动PictureSelector：
 
 ```
 private final int REQUEST_CODE_1 = 1001;
 private ArrayList<ImageEntity> selectedImages;
 ...
 PSConfigUtil.getInstance().showSelector(MainActivity.this, REQUEST_CODE_1, selectedImages);
+／／或者不传参数，注意传递已选择图片的大小不能超过设置的最大数量
+PSConfigUtil.getInstance().showSelector(MainActivity.this, REQUEST_CODE_1);
 ```
 
-3、接收选择的图片数据：
+4、接收选择的图片数据：
 
 ```
 	@Override
@@ -50,7 +64,7 @@ PSConfigUtil.getInstance().showSelector(MainActivity.this, REQUEST_CODE_1, selec
     }
 ```
 
-4、清除图片缓存(删除)
+5、清除图片缓存(删除)
 
 * 清除裁剪图片：
 
@@ -70,7 +84,7 @@ PSConfigUtil.clearCache();
 ```
 
 ## Thanks
-* 图片预览在PhotoView的基础上做了一定的修改；
+* 图片预览在[PhotoView](https://github.com/chrisbanes/PhotoView)的基础上做了一定的修改；
 * 图片裁剪使用了鸿洋大神的[仿微信头像裁剪](http://blog.csdn.net/lmj623565791/article/details/39761281),加载和裁剪算法并做了一定的修改。
 * 图片加载使用Glide
 * 事件传递使用Eventbus

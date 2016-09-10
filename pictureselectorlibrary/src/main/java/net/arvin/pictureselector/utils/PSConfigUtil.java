@@ -8,6 +8,7 @@ import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.uis.PictureSelectorActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * created by arvin on 16/8/30 22:36
@@ -126,9 +127,21 @@ public class PSConfigUtil {
 
     public void showSelector(Activity activity, int requestCode, ArrayList<ImageEntity> selectedImages) {
         Intent intent = new Intent(activity, PictureSelectorActivity.class);
+        ArrayList<ImageEntity> realSelectedImages = new ArrayList<>();
         if (selectedImages != null) {
-            intent.putParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED, selectedImages);
+//            超过了也可以这样处理,截取某个区间的图片作为选择图片,例如[selectedImages.size() - getMaxCount(),selectedImages.size())
+//            if (selectedImages.size() > getMaxCount()) {
+//                for (int i = selectedImages.size() - getMaxCount(); i < selectedImages.size(); i++) {
+//                    realSelectedImages.add(selectedImages.get(i));
+//                }
+//            }else{
+//                realSelectedImages.addAll(selectedImages);
+//            }
+            if (selectedImages.size() > getMaxCount()){
+                throw new RuntimeException("selectedImages' size can not more than maxCount!");
+            }
         }
+        intent.putParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED, realSelectedImages);
         activity.startActivityForResult(intent, requestCode);
     }
 

@@ -1,28 +1,18 @@
 package net.arvin.pictureselectordemo;
 
 import android.content.Intent;
-import android.media.Image;
-import android.os.Parcelable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import net.arvin.pictureselector.entities.ImageEntity;
-import net.arvin.pictureselector.entities.ImageFolderEntity;
-import net.arvin.pictureselector.models.ImagesModel;
-import net.arvin.pictureselector.uis.PictureSelectorActivity;
-import net.arvin.pictureselector.uis.adapters.PictureSelectorAdapter;
 import net.arvin.pictureselector.utils.PSConfigUtil;
 import net.arvin.pictureselector.utils.PSConstanceUtil;
-import net.arvin.pictureselector.utils.PSCropUtil;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-
-import rx.functions.Action1;
 
 public class MainActivity extends AppCompatActivity {
     private final int REQUEST_CODE_1 = 1001;
@@ -35,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         selectedImages = new ArrayList<>();
+
+        PSConfigUtil.getInstance().setCanCrop(false)
+                .setCanTakePhoto(true)
+                .setMaxCount(9);
 
         findViewById(R.id.tv_test).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case REQUEST_CODE_1:
-                    selectedImages.clear();
                     List<ImageEntity> temp = data.getParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED);
                     selectedImages.addAll(temp);
                     for (ImageEntity selectedImage : selectedImages) {
