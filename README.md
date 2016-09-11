@@ -4,15 +4,19 @@
 效果图：
 
 * 选择界面
+
 ![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/main.png)
 
-＊ 预览界面
+* 预览界面
+
 ![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/review.png)
 
-＊ 裁剪界面
+* 裁剪界面
+
 ![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/crop.png)
 
-＊ 选择文件目录界面
+* 选择文件目录界面
+
 ![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/folder.png)
 
 
