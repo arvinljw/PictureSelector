@@ -1,6 +1,22 @@
 # PictureSelector
 这是一个仿微信的图片选择器。
 
+效果图：
+
+* 选择界面
+![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/main.png)
+
+＊ 预览界面
+![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/review.png)
+
+＊ 裁剪界面
+![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/crop.png)
+
+＊ 选择文件目录界面
+![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/folder.png)
+
+
+
 ## Features
 1、图片来源：拍照，本地图片媒体库中jpg和png类型的图片
 
