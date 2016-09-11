@@ -120,10 +120,6 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
         });
     }
 
-    private void asyncSelectedImages() {
-
-    }
-
     @Override
     public void update(Bundle data) {
         //没有数据表示不裁剪,重新选择图片

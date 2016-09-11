@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
         selectedImages = new ArrayList<>();
 
-        PSConfigUtil.getInstance().setCanCrop(false)
+        PSConfigUtil.getInstance().setCanCrop(true)
                 .setCanTakePhoto(true)
-                .setMaxCount(9);
+                .setMaxCount(1);
 
         findViewById(R.id.tv_test).setOnClickListener(new View.OnClickListener() {
             @Override

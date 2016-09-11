@@ -1,17 +1,22 @@
 # PictureSelector
-这是一个仿微信的图片选择器
+这是一个仿微信的图片选择器。
 
 ## Features
-1、图片来源：拍照，本地jpg和png类型的图片
+1、图片来源：拍照，本地图片媒体库中jpg和png类型的图片
 
-2、功能：多选，单选，图片预览，裁剪
+2、功能：多选、单选、拍照、预览、裁剪
 
-3、todo：使用MVP模式重构代码、优化细节（一些动画）、整理解析文档
+3、todo：优化细节（一些动画）、整理解析文档
 
 ## Usage
-1、引用Lib
+1、引用Lib（Android studio）
 
-* 下载Lib通过引用Module方式引用
+* 在dependencies下加上
+
+```
+compile ‘net.arvin.pictureselector:pictureselectorlibrary:1.0.0’
+```
+*建议通过引用Module方式引用，这样会更方便定制*
 
 * 在AndroidManifest.xml文件中添加：
 
