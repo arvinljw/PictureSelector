@@ -34,13 +34,16 @@
 * 在dependencies下加上
 
 ```
-compile ‘net.arvin.pictureselector:pictureselectorlibrary:1.0.0’
+compile 'net.arvin.pictureselector:pictureselectorlibrary:1.0.0'
 ```
 *建议通过引用Module方式引用，这样会更方便定制*
 
 * 在AndroidManifest.xml文件中添加：
 
 ```
+<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+...
 <activity
     android:name="net.arvin.pictureselector.uis.PictureSelectorActivity"
     android:screenOrientation="portrait" />
