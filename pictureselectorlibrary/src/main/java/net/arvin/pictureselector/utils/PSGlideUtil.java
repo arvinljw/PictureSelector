@@ -15,11 +15,11 @@ import net.arvin.pictureselector.R;
  */
 public class PSGlideUtil {
     public static void loadLocalImage(Context context, int resId, ImageView imageView) {
-        Glide.with(context).load(resId).placeholder(R.color.colorPrimaryDark).error(R.drawable.ps_img_loading).into(imageView);
+        Glide.with(context).load(resId).placeholder(R.drawable.ps_img_loading).error(R.drawable.ps_img_loading).into(imageView);
     }
 
     public static void loadImage(Context context, String path, ImageView imageView) {
-        Glide.with(context).load(path).placeholder(R.color.colorPrimaryDark).error(R.drawable.ps_img_loading).into(imageView);
+        Glide.with(context).load(path).placeholder(R.drawable.ps_img_loading).error(R.drawable.ps_img_loading).into(imageView);
     }
 
     public static void loadImage(Context context, String path, ImageView imageView, RequestListener<String, GlideDrawable> listener) {

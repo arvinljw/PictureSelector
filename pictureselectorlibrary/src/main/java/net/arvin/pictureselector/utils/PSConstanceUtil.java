@@ -12,6 +12,7 @@ public class PSConstanceUtil {
     public static final String PASS_SHOW = "key1";
     public static final String PASS_SELECTED = "key2";
     public static final String PASS_CURRENT_POS = "key3";
+    public static final String PASS_EXTRA= "key4";
 
     public static final String FOLDER_NAME = "PicSelector";
     public static final String FROM_CAMERA = "from_camera";

@@ -29,7 +29,6 @@ import static net.arvin.pictureselector.entities.PageChangeEntity.PageId.*;
  * email：1035407623@qq.com
  */
 public class PictureSelectorActivity extends AppCompatActivity {
-    public static final int TAKE_PHOTO_CODE = 1001;
 
     private PictureSelectorFragment mPictureSelectorFragment;
     private ReviewFragment mReviewFragment;
@@ -55,6 +54,7 @@ public class PictureSelectorActivity extends AppCompatActivity {
     /**
      * @param pageChange 控制fragment的显示和隐藏
      */
+    @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(PageChangeEntity pageChange) {
         showFragmentById(pageChange.getPage(), pageChange.getData());
@@ -63,6 +63,7 @@ public class PictureSelectorActivity extends AppCompatActivity {
     /**
      * @param selectedImage 返回已选择的图片
      */
+    @SuppressWarnings("unused")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ArrayList<ImageEntity> selectedImage) {
         Intent data = new Intent();
@@ -129,14 +130,12 @@ public class PictureSelectorActivity extends AppCompatActivity {
     }
 
     private BaseFragment showCrop(Bundle bundle, FragmentTransaction transaction) {
-        if (mCropFragment == null) {
-            mCropFragment = new CropFragment();
-            mCropFragment.setArguments(bundle);
-            transaction.add(R.id.ps_content, mCropFragment);
-            return mCropFragment;
+        if (mCropFragment != null) {
+            transaction.remove(mCropFragment);
         }
-        mCropFragment.update(bundle);
-        transaction.show(mCropFragment);
+        mCropFragment = new CropFragment();
+        mCropFragment.setArguments(bundle);
+        transaction.add(R.id.ps_content, mCropFragment);
         return mCropFragment;
     }
 
@@ -154,6 +153,5 @@ public class PictureSelectorActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        PSConfigUtil.getInstance().clear();
     }
 }

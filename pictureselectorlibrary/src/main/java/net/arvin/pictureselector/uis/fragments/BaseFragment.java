@@ -2,11 +2,9 @@ package net.arvin.pictureselector.uis.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.arvin.pictureselector.R;
@@ -51,7 +49,7 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         return (T) mRoot.findViewById(viewId);
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "unused"})
     protected final <T extends ViewGroup> T getLayout(int layoutResId) {
         return (T) LayoutInflater.from(getActivity()).inflate(layoutResId, null);
     }
@@ -65,7 +63,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
 
         if(v.getId()==R.id.tv_ensure){
             onEnsureClicked();
-            return ;
         }
     }
 

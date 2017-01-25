@@ -2,7 +2,6 @@ package net.arvin.pictureselector.uis.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -28,7 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.functions.Action1;
+import rx.Subscriber;
 
 /**
  * created by arvin on 16/8/28 00:02
@@ -38,9 +37,7 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
         FolderDialog.OnFolderSelectedListener, PSTakePhotoUtil.OnTakePhotoSuccessListener {
     private TextView tvReview;
     private TextView tvSelectedImageFolderName;
-    private RecyclerView rlFolder;
 
-    private RecyclerView rlImages;
     private PictureSelectorAdapter mAdapter;
     //用于显示的图集
     private ArrayList<ImageEntity> mItems;
@@ -84,7 +81,7 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
         mItems = new ArrayList<>();
         mSelectedImages = new ArrayList<>();
 
-        rlImages = getView(R.id.rl_images);
+        RecyclerView rlImages = getView(R.id.rl_images);
         rlImages.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         rlImages.addItemDecoration(new DividerGridItemDecoration(getActivity()));
         mAdapter = new PictureSelectorAdapter(getActivity(), mItems);
@@ -96,9 +93,26 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
     private void loadData() {
         final ArrayList<ImageEntity> temp = getArguments().getParcelableArrayList(PSConstanceUtil.PASS_SELECTED);
 
-        ImagesModel.getImageFolders(getActivity()).subscribe(new Action1<List<ImageFolderEntity>>() {
+        ImagesModel.getImageFolders(getActivity()).subscribe(new Subscriber<List<ImageFolderEntity>>() {
             @Override
-            public void call(List<ImageFolderEntity> imageFolderEntities) {
+            public void onCompleted() {
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                mImageFolders = new ArrayList<>();
+                ImageFolderEntity imageFolder = new ImageFolderEntity();
+                imageFolder.setCount(0);
+                imageFolder.setFirstImagePath("");
+                imageFolder.setFolderName("所有图片");
+                imageFolder.setImages(new ArrayList<ImageEntity>());
+                mImageFolders.add(imageFolder);
+                mAdapter.notifyDataSetChanged();
+                asyncShow(mSelectedImages.size());
+            }
+
+            @Override
+            public void onNext(List<ImageFolderEntity> imageFolderEntities) {
                 mImageFolders = imageFolderEntities;
                 if (mImageFolders != null && mImageFolders.size() > 0) {
                     if (temp != null && temp.size() > 0) {
@@ -162,7 +176,6 @@ public class PictureSelectorFragment extends BaseFragment implements OnItemClick
 
         if (v.getId() == R.id.tv_selected_image_folder_name) {
             showImageFolder();
-            return;
         }
     }
 

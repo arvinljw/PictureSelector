@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#393a3e</color>
-    <color name="colorPrimaryDark">#2f3034</color>
-    <color name="colorAccent">#1cab1d</color>
-    <color name="colorAccentHalf">#881cab1d</color>
-    <color name="colorAccentEnable">#2a5f2f</color>
+    <color name="ps_colorPrimary">#393a3e</color>
+    <color name="ps_colorPrimaryDark">#2f3034</color>
+    <color name="ps_colorAccent">#1cab1d</color>
+    <color name="ps_colorAccentHalf">#881cab1d</color>
+    <color name="ps_colorAccentEnable">#2a5f2f</color>
 
     <!--color : white-->
     <color name="white_divider">#1FFFFFFF</color><!--12% 分隔线-->

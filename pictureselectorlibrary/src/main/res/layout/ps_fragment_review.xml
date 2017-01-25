@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_tab_bar"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/ps_colorPrimaryDark">
 
         <LinearLayout
             android:id="@+id/layout_selector"

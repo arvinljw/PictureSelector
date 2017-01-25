@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:id="@+id/layout_header"
     android:layout_height="@dimen/spacing_tab_bar"
-    android:background="@color/colorPrimary"
+    android:background="@color/ps_colorPrimary"
     android:orientation="horizontal">
 
     <ImageView
@@ -20,7 +20,7 @@
         android:layout_height="24dp"
         android:layout_gravity="center_vertical"
         android:layout_marginRight="@dimen/spacing_default"
-        android:background="@color/colorPrimaryDark" />
+        android:background="@color/ps_colorPrimaryDark" />
 
     <TextView
         android:id="@+id/tv_title"

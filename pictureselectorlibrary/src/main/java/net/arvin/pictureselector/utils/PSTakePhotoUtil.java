@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
-import android.os.Environment;
+import android.os.Build;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 
 import java.io.File;
@@ -62,9 +62,37 @@ public class PSTakePhotoUtil {
         return Calendar.getInstance().getTimeInMillis() + ".jpg";
     }
 
+    /**
+     * 在res目录下创建xml文件夹，再在该目录下创建file_paths.xml，内容如下：
+     * <?xml version="1.0" encoding="utf-8"?>
+     * <resources>
+     * <paths>
+     * <external-path name="camera_photos" path="" />
+     * </paths>
+     * </resources>
+     * 在manifest的application标签中加入配置
+     * <provider
+     * android:name="android.support.v4.content.FileProvider"
+     * android:authorities="net.arvin.takephoto.fileprovider"
+     * android:exported="false"
+     * android:grantUriPermissions="true">
+     * <meta-data
+     * android:name="android.support.FILE_PROVIDER_PATHS"
+     * android:resource="@xml/file_paths" />
+     * </provider>
+     * <p>
+     * 上边的authorities属性值，可以自定义，需要与下面的FileProvider.getUriForFile(String,String,File)第二个参数一致
+     */
     private Intent getCameraIntent(File f) {
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Uri imageUri = FileProvider.getUriForFile(mActivity, "net.arvin.takephoto.fileprovider", f);//通过FileProvider创建一个content类型的Uri
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);//将拍取的照片保存到指定URI
+
+        } else {
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
+        }
         return intent;
     }
 

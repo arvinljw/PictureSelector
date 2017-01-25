@@ -3,20 +3,20 @@
     <item android:state_enabled="true">
         <shape>
             <corners android:radius="@dimen/spacing_two"/>
-            <solid android:color="@color/colorAccent"/>
+            <solid android:color="@color/ps_colorAccent"/>
         </shape>
     </item>
 
     <item android:state_enabled="false">
         <shape>
             <corners android:radius="@dimen/spacing_two"/>
-            <solid android:color="@color/colorAccentEnable"/>
+            <solid android:color="@color/ps_colorAccentEnable"/>
         </shape>
     </item>
     <item android:state_pressed="true">
         <shape>
             <corners android:radius="@dimen/spacing_two"/>
-            <solid android:color="@color/colorAccentHalf"/>
+            <solid android:color="@color/ps_colorAccentHalf"/>
         </shape>
     </item>
 </selector>

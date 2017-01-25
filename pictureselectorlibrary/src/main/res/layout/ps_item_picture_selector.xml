@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:alpha="0.8"
         android:scaleType="centerCrop"
-        android:src="@color/colorPrimaryDark" />
+        android:src="@color/ps_colorPrimaryDark" />
 
     <FrameLayout
         android:id="@+id/layout_selector"

@@ -23,7 +23,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     @SuppressWarnings("ResourceType")
     public DividerGridItemDecoration(Context context) {
         Resources resources = context.getResources();
-        mDivider = resources.getDrawable(R.color.colorPrimaryDark);
+        mDivider = resources.getDrawable(R.color.ps_colorPrimaryDark);
     }
 
     public DividerGridItemDecoration setDividerHeight(int dividerHeight) {

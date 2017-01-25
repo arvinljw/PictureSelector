@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.uis.PictureSelectorActivity;
+import net.arvin.pictureselector.uis.TakePhotoAndCropActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,6 @@ import java.util.List;
  * email：1035407623@qq.com
  */
 public class PSConfigUtil {
-
-
     private static PSConfigUtil sInstance;
     /**
      * 多选图片上限
@@ -127,7 +126,6 @@ public class PSConfigUtil {
 
     public void showSelector(Activity activity, int requestCode, ArrayList<ImageEntity> selectedImages) {
         Intent intent = new Intent(activity, PictureSelectorActivity.class);
-        ArrayList<ImageEntity> realSelectedImages = new ArrayList<>();
         if (selectedImages != null) {
 //            超过了也可以这样处理,截取某个区间的图片作为选择图片,例如[selectedImages.size() - getMaxCount(),selectedImages.size())
 //            if (selectedImages.size() > getMaxCount()) {
@@ -141,12 +139,17 @@ public class PSConfigUtil {
                 throw new RuntimeException("selectedImages' size can not more than maxCount!");
             }
         }
-        intent.putParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED, realSelectedImages);
+        intent.putParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED, selectedImages);
         activity.startActivityForResult(intent, requestCode);
     }
 
     public void showSelector(Activity activity, int requestCode) {
         showSelector(activity, requestCode, null);
+    }
+
+    public void showTakePhotoAndCrop(Activity activity, int requestCode) {
+        Intent intent = new Intent(activity, TakePhotoAndCropActivity.class);
+        activity.startActivityForResult(intent, requestCode);
     }
 
     /**

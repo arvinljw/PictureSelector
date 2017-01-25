@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
+    android:background="@color/ps_colorPrimaryDark"
     >
 
     <android.support.design.widget.AppBarLayout
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_tab_bar"
         android:layout_gravity="bottom"
-        android:background="@color/colorPrimary"
+        android:background="@color/ps_colorPrimary"
         app:layout_behavior="net.arvin.pictureselector.views.ScrollDownHideBehavior">
 
         <TextView
@@ -64,7 +64,7 @@
             android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/tv_review"
-            android:background="@color/colorPrimaryDark" />
+            android:background="@color/ps_colorPrimaryDark" />
     </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

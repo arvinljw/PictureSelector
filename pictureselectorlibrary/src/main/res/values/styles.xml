@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="normal_dialog" parent="Base.Theme.AppCompat.Light.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowNoTitle">true</item>
@@ -10,5 +11,4 @@
     <style name="normal_dialog.white">
         <item name="android:windowBackground">@color/white_normal</item>
     </style>
-
 </resources>

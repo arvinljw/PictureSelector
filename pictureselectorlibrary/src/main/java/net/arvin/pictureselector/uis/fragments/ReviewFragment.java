@@ -1,11 +1,8 @@
 package net.arvin.pictureselector.uis.fragments;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -17,13 +14,11 @@ import net.arvin.pictureselector.uis.adapters.ReviewAdapter;
 import net.arvin.pictureselector.utils.PSAnimUtil;
 import net.arvin.pictureselector.utils.PSConfigUtil;
 import net.arvin.pictureselector.utils.PSConstanceUtil;
-import net.arvin.pictureselector.views.DepthPageTransformer;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.security.PolicySpi;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +30,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
     private ArrayList<ImageEntity> mItems;
     private int currentPos;
 
-    private ReviewAdapter mAdapter;
-
     private ViewPager vpImages;
-    private LinearLayout layoutSelector;
     private ImageView imgSelector;
     private boolean isSelected;
     private boolean isShow = true;
@@ -50,7 +42,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
 
     @Override
     protected void init(Bundle savedInstanceState) {
-        layoutSelector = getView(R.id.layout_selector);
+        LinearLayout layoutSelector = getView(R.id.layout_selector);
         imgSelector = getView(R.id.img_selector);
         layoutSelector.setOnClickListener(this);
 
@@ -65,6 +57,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
         update(getArguments());
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public void update(Bundle data) {
         //因为每次都会调用这个方法,所以在这里注册,在返回时反注册
@@ -80,7 +73,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
         mSelectedImages.addAll(selectedData);
         this.currentPos = currentPos;
 
-        mAdapter = new ReviewAdapter(getChildFragmentManager(), mItems);
+        ReviewAdapter mAdapter = new ReviewAdapter(getChildFragmentManager(), mItems);
         vpImages.setAdapter(mAdapter);
 //        vpImages.setPageTransformer(false, new DepthPageTransformer());
         vpImages.setCurrentItem(currentPos);
@@ -96,6 +89,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
     /**
      * Page中的图片被点击
      */
+    @SuppressWarnings("UnusedParameters")
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(ScaleImageFragment.OnImageClicked onImageClicked) {
         if (isShow) {
@@ -116,7 +110,6 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
         super.onClick(v);
         if (v.getId() == R.id.layout_selector) {
             onItemSelect(currentPos, !isSelected);
-            return;
         }
     }
 
@@ -127,7 +120,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
     private void onItemSelect(int currentPos, boolean isSelected) {
         ImageEntity item = mItems.get(currentPos);
         if (!PSConfigUtil.getInstance().canAdd() && !item.isSelected()) {
-            Toast.makeText(getActivity(), getString(R.string.ps_max_count_tips, PSConfigUtil.getInstance().getMaxCount()),
+            Toast.makeText(getActivity(), getString(R.string.ps_max_count_tips, "" + PSConfigUtil.getInstance().getMaxCount()),
                     Toast.LENGTH_SHORT).show();
             return;
         }

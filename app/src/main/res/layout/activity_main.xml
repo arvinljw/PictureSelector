@@ -10,17 +10,53 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="net.arvin.pictureselectordemo.MainActivity">
 
-    <TextView
-        android:id="@+id/tv_test"
-        android:layout_width="wrap_content"
+
+    <ImageView
+        android:id="@+id/img_test"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/black_hint"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_open_gallery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/spacing_default"
+            android:text="打开相册" />
+
+        <TextView
+            android:id="@+id/tv_open_camera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="@dimen/spacing_default"
+            android:text="打开相机" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_switch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="@dimen/spacing_default"
-        android:text="showSelector" />
+        android:text="单选" />
 
     <TextView
         android:id="@+id/tv_clear"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:padding="@dimen/spacing_default"
-        android:text="clearCache" />
+        android:text="清除缓存" />
 </LinearLayout>
