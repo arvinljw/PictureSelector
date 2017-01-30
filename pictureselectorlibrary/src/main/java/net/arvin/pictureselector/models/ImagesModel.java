@@ -3,8 +3,6 @@ package net.arvin.pictureselector.models;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 
 import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.entities.ImageFolderEntity;

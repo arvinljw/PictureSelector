@@ -37,7 +37,6 @@ import android.os.Build.VERSION;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -666,7 +665,7 @@ public class SubsamplingScaleImageView extends View {
      * Handle touch events. One finger pans, and two finger pinch and zoom plus panning.
      */
     @Override
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
+    public boolean onTouchEvent(MotionEvent event) {
         // During non-interruptible anims, ignore all touch events
         if (anim != null && !anim.interruptible) {
             requestDisallowInterceptTouchEvent(true);
@@ -714,7 +713,7 @@ public class SubsamplingScaleImageView extends View {
     }
 
     @SuppressWarnings("deprecation")
-    private boolean onTouchEventInternal(@NonNull MotionEvent event) {
+    private boolean onTouchEventInternal(MotionEvent event) {
         int touchCount = event.getPointerCount();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:

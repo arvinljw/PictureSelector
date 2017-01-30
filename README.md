@@ -5,19 +5,19 @@
 
 * 选择界面
 
-![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/main.png)
+![](screenshot/main.png)
 
 * 预览界面
 
-![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/review.png)
+![](screenshot/review.png)
 
 * 裁剪界面
 
-![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/crop.png)
+![](screenshot/crop.png)
 
 * 选择文件目录界面
 
-![](https://github.com/arvinljw/PictureSelector/blob/master/screenshot/folder.png)
+![](screenshot/folder.png)
 
 
 
@@ -31,23 +31,49 @@
 ## Usage
 1、引用Lib（Android studio）
 
-* 在dependencies下加上
-
-```
-compile 'net.arvin.pictureselector:pictureselectorlibrary:1.0.0'
-```
-*建议通过引用Module方式引用，这样会更方便定制*
+通过引用Module方式引用，这样会更方便定制
 
 * 在AndroidManifest.xml文件中添加：
 
 ```
+<uses-permission android:name="android.permission.CAMERA"/>
 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 ...
+
+<!--7.0以上拍照适配-->
+<provider
+	android:name="android.support.v4.content.FileProvider"
+	android:authorities="net.arvin.takephoto.fileprovider"
+	android:exported="false"
+	android:grantUriPermissions="true">
+	<meta-data
+		android:name="android.support.FILE_PROVIDER_PATHS"
+		android:resource="@xml/file_paths" />
+</provider>
+
 <activity
     android:name="net.arvin.pictureselector.uis.PictureSelectorActivity"
     android:screenOrientation="portrait" />
+    
+<activity
+	android:name="net.arvin.pictureselector.uis.TakePhotoAndCropActivity"
+	android:screenOrientation="portrait" />
 ```
+
+* 在res文件夹下创建xml文件夹，再创建file_paths.xml文件，内容如下：
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <paths>
+        <external-path
+            name="camera_photos"
+            path="" />
+    </paths>
+</resources>
+```
+该配置的含义这里就不解释了，想了解的可以去看看[这里](https://developer.android.com/reference/android/support/v4/content/FileProvider.html)
 
 2、修改默认配置
 
@@ -72,27 +98,48 @@ PSConfigUtil.getInstance().showSelector(MainActivity.this, REQUEST_CODE_1, selec
 PSConfigUtil.getInstance().showSelector(MainActivity.this, REQUEST_CODE_1);
 ```
 
-4、接收选择的图片数据：
+4、启动拍照
+
+```
+private final int REQUEST_CODE_2 = 1002;
+PSConfigUtil.getInstance().showTakePhotoAndCrop(MainActivity.this, REQUEST_CODE_2);
+```
+
+5、接收选择的图片数据：
 
 ```
 	@Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case REQUEST_CODE_1:
+                case REQUEST_CODE_1: {
                     selectedImages.clear();
                     List<ImageEntity> temp = data.getParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED);
                     selectedImages.addAll(temp);
+
+                    PSGlideUtil.loadImage(this, "file://" + temp.get(0).getPath(), img);
                     for (ImageEntity selectedImage : selectedImages) {
                         Log.d("back_data", selectedImage.getPath());
                     }
                     break;
+                }
+                case REQUEST_CODE_2: {
+                    selectedImages.clear();
+                    List<ImageEntity> temp = data.getParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED);
+                    selectedImages.addAll(temp);
+
+                    PSGlideUtil.loadImage(this, "file://" + temp.get(0).getPath(), img);
+                    for (ImageEntity selectedImage : selectedImages) {
+                        Log.d("back_data", selectedImage.getPath());
+                    }
+                    break;
+                }
             }
         }
     }
 ```
 
-5、清除图片缓存(删除)
+6、清除图片缓存(删除)
 
 * 清除裁剪图片：
 
@@ -114,6 +161,7 @@ PSConfigUtil.clearCache();
 ## Thanks
 * 图片预览在[PhotoView](https://github.com/chrisbanes/PhotoView)的基础上做了一定的修改；
 * 图片裁剪使用了鸿洋大神的[仿微信头像裁剪](http://blog.csdn.net/lmj623565791/article/details/39761281),加载和裁剪算法并做了一定的修改。
+* 大图显示使用了[SubsamplingScaleImageView](https://github.com/davemorrissey/subsampling-scale-image-view),并增加裁剪（还有优化空间）
 * 图片加载使用Glide
 * 事件传递使用Eventbus
 * 异步操作使用了Rxjava和Rxandroid
