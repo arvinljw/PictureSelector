@@ -19,9 +19,8 @@
 
 ![](screenshot/folder.png)
 
-
-
 ## Features
+
 1、图片来源：拍照，本地图片媒体库中jpg和png类型的图片
 
 2、功能：多选、单选、拍照、预览、裁剪
@@ -29,6 +28,7 @@
 3、todo：优化细节（一些动画）、整理解析文档
 
 ## Usage
+
 1、引用Lib（Android studio）
 
 通过引用Module方式引用，这样会更方便定制
@@ -159,6 +159,7 @@ PSConfigUtil.clearCache();
 ```
 
 ## Thanks
+
 * 图片预览在[PhotoView](https://github.com/chrisbanes/PhotoView)的基础上做了一定的修改；
 * 图片裁剪使用了鸿洋大神的[仿微信头像裁剪](http://blog.csdn.net/lmj623565791/article/details/39761281),加载和裁剪算法并做了一定的修改。
 * 大图显示使用了[SubsamplingScaleImageView](https://github.com/davemorrissey/subsampling-scale-image-view),并增加裁剪（还有优化空间）
@@ -168,8 +169,8 @@ PSConfigUtil.clearCache();
 
 在此表示感谢！
 
-
 ## License
+
 ```
    Copyright 2016 arvinljw
 
