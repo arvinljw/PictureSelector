@@ -3,6 +3,7 @@ package net.arvin.pictureselector.utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.uis.PictureSelectorActivity;
@@ -16,6 +17,9 @@ import java.util.List;
  * email：1035407623@qq.com
  */
 public class PSConfigUtil {
+    private static final String endName = ".takephoto.fileprovider";
+    private static String sAuthorities;
+
     private static PSConfigUtil sInstance;
     /**
      * 多选图片上限
@@ -52,6 +56,14 @@ public class PSConfigUtil {
             sInstance = new PSConfigUtil();
         }
         return sInstance;
+    }
+
+    public static String getAuthorities() {
+        return sAuthorities;
+    }
+
+    public static void setAuthorities(String sAuthorities) {
+        PSConfigUtil.sAuthorities = sAuthorities;
     }
 
     /**
@@ -125,6 +137,7 @@ public class PSConfigUtil {
     }
 
     public void showSelector(Activity activity, int requestCode, ArrayList<ImageEntity> selectedImages) {
+        initAuthorities(activity);
         Intent intent = new Intent(activity, PictureSelectorActivity.class);
         if (selectedImages != null) {
 //            超过了也可以这样处理,截取某个区间的图片作为选择图片,例如[selectedImages.size() - getMaxCount(),selectedImages.size())
@@ -148,8 +161,15 @@ public class PSConfigUtil {
     }
 
     public void showTakePhotoAndCrop(Activity activity, int requestCode) {
+        initAuthorities(activity);
         Intent intent = new Intent(activity, TakePhotoAndCropActivity.class);
         activity.startActivityForResult(intent, requestCode);
+    }
+
+    private void initAuthorities(Activity activity) {
+        if (TextUtils.isEmpty(PSConfigUtil.sAuthorities)) {
+            sAuthorities = activity.getPackageName() + endName;
+        }
     }
 
     /**

@@ -7,4 +7,5 @@
 /.idea/libraries
 .DS_Store
 /build
+/gradle
 /captures

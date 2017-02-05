@@ -73,7 +73,7 @@ public class PSTakePhotoUtil {
      * 在manifest的application标签中加入配置
      * <provider
      * android:name="android.support.v4.content.FileProvider"
-     * android:authorities="net.arvin.takephoto.fileprovider"
+     * android:authorities="换成包名.takephoto.fileprovider"
      * android:exported="false"
      * android:grantUriPermissions="true">
      * <meta-data
@@ -86,10 +86,9 @@ public class PSTakePhotoUtil {
     private Intent getCameraIntent(File f) {
         final Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Uri imageUri = FileProvider.getUriForFile(mActivity, "net.arvin.takephoto.fileprovider", f);//通过FileProvider创建一个content类型的Uri
+            Uri imageUri = FileProvider.getUriForFile(mActivity, PSConfigUtil.getAuthorities(), f);//通过FileProvider创建一个content类型的Uri
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); //添加这一句表示对目标应用临时授权该Uri所代表的文件
             intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);//将拍取的照片保存到指定URI
-
         } else {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f));
         }
