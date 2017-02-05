@@ -44,7 +44,7 @@
 <!--7.0以上拍照适配-->
 <provider
 	android:name="android.support.v4.content.FileProvider"
-	android:authorities="net.arvin.takephoto.fileprovider"
+	android:authorities="项目包名.takephoto.fileprovider"
 	android:exported="false"
 	android:grantUriPermissions="true">
 	<meta-data
@@ -60,6 +60,8 @@
 	android:name="net.arvin.pictureselector.uis.TakePhotoAndCropActivity"
 	android:screenOrientation="portrait" />
 ```
+
+注意：provider的android:authorities属性把项目包名换成该项目的包名，因为在手机中，这个属性是不能重复的。
 
 * 在res文件夹下创建xml文件夹，再创建file_paths.xml文件，内容如下：
 
