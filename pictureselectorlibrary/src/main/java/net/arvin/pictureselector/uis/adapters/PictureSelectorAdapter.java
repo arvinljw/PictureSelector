@@ -16,6 +16,7 @@ import net.arvin.pictureselector.listeners.OnItemClickListener;
 import net.arvin.pictureselector.listeners.OnItemSelectedListener;
 import net.arvin.pictureselector.utils.PSConfigUtil;
 import net.arvin.pictureselector.utils.PSGlideUtil;
+import net.arvin.pictureselector.utils.ScreenUtil;
 import net.arvin.pictureselector.views.SquareImageView;
 
 import java.util.List;
@@ -27,6 +28,8 @@ import java.util.List;
 public class PictureSelectorAdapter extends RecyclerView.Adapter {
     private static final int TYPE_TAKE_PHOTO = 1;
     private static final int TYPE_NORMAL = 2;
+
+    private final int imgHeight = ScreenUtil.getScreenWidth() / 3;
 
     private Context mContext;
     private List<ImageEntity> mItems;
@@ -94,13 +97,17 @@ public class PictureSelectorAdapter extends RecyclerView.Adapter {
     }
 
     public class PictureSelectorHolder extends RecyclerView.ViewHolder {
-        SquareImageView imgContent;
+        ImageView imgContent;
         ImageView imgSelector;
         FrameLayout layoutSelector;
 
         public PictureSelectorHolder(View itemView) {
             super(itemView);
-            imgContent = (SquareImageView) itemView.findViewById(R.id.img_content);
+            imgContent = (ImageView) itemView.findViewById(R.id.img_content);
+            ViewGroup.LayoutParams layoutParams = imgContent.getLayoutParams();
+            layoutParams.height = imgHeight;
+            imgContent.setLayoutParams(layoutParams);
+
             imgSelector = (ImageView) itemView.findViewById(R.id.img_selector);
             layoutSelector = (FrameLayout) itemView.findViewById(R.id.layout_selector);
         }
@@ -111,9 +118,9 @@ public class PictureSelectorAdapter extends RecyclerView.Adapter {
         }
 
         public void setEvent(int position) {
-            if(!PSConfigUtil.getInstance().canReview()){
+            if (!PSConfigUtil.getInstance().canReview()) {
                 layoutSelector.setVisibility(View.GONE);
-            }else{
+            } else {
                 layoutSelector.setVisibility(View.VISIBLE);
             }
 
@@ -121,8 +128,8 @@ public class PictureSelectorAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v, int position) {
                     ImageEntity item = mItems.get(position);
-                    if (!PSConfigUtil.getInstance().canAdd()&&!item.isSelected()) {
-                        Toast.makeText(mContext, mContext.getString(R.string.ps_max_count_tips,PSConfigUtil.getInstance().getMaxCount()),
+                    if (!PSConfigUtil.getInstance().canAdd() && !item.isSelected()) {
+                        Toast.makeText(mContext, mContext.getString(R.string.ps_max_count_tips, PSConfigUtil.getInstance().getMaxCount()),
                                 Toast.LENGTH_SHORT).show();
                         return;
                     }
