@@ -1,4 +1,5 @@
 # PictureSelector
+
 这是一个仿微信的图片选择器。
 
 效果图：
@@ -26,6 +27,12 @@
 2、功能：多选、单选、拍照、预览、裁剪
 
 3、todo：优化细节（一些动画）、整理解析文档
+
+## Demo下载地址
+
+![](screenshot/ps_icon.png)
+
+[PicSelector下载地址](app/PicSelector.apk)
 
 ## Usage
 

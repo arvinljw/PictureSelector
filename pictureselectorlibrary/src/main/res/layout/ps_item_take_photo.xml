@@ -16,7 +16,7 @@
             android:id="@+id/is_item_img"
             android:layout_width="@dimen/spacing_tab_bar"
             android:layout_height="@dimen/spacing_tab_bar"
-            android:contentDescription="@string/app_name"
+            android:contentDescription="@string/lib_name"
             android:scaleType="centerCrop"
             android:src="@drawable/ps_img_take_photo" />
 
