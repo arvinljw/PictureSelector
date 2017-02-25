@@ -15,7 +15,7 @@ import net.arvin.pictureselector.R;
 import net.arvin.pictureselector.entities.ImageFolderEntity;
 import net.arvin.pictureselector.listeners.OnItemClickListener;
 import net.arvin.pictureselector.uis.adapters.ImageFolderAdapter;
-import net.arvin.pictureselector.utils.ScreenUtil;
+import net.arvin.pictureselector.utils.PSScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,10 +43,10 @@ public class FolderDialog extends Dialog implements OnItemClickListener {
         getWindow().setGravity(Gravity.START | Gravity.TOP);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.x = 0;
-        lp.y = ScreenUtil.dp2px(96);
+        lp.y = PSScreenUtil.dp2px(96);
         lp.width = metrics.widthPixels;
         //这个高度包括了状态栏,所以还要多减去24dp
-        lp.height = metrics.heightPixels - ScreenUtil.dp2px(168);
+        lp.height = metrics.heightPixels - PSScreenUtil.dp2px(168);
         getWindow().setAttributes(lp);
     }
 

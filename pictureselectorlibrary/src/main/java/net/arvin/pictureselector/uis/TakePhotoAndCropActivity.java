@@ -1,7 +1,6 @@
 package net.arvin.pictureselector.uis;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
@@ -12,9 +11,10 @@ import net.arvin.pictureselector.R;
 import net.arvin.pictureselector.entities.FinishEntity;
 import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.uis.fragments.CropFragment;
+import net.arvin.pictureselector.utils.PSConfigUtil;
 import net.arvin.pictureselector.utils.PSConstanceUtil;
 import net.arvin.pictureselector.utils.PSTakePhotoUtil;
-import net.arvin.pictureselector.utils.StatusBarUtil;
+import net.arvin.pictureselector.utils.PSStatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,7 +35,7 @@ public class TakePhotoAndCropActivity extends AppCompatActivity implements PSTak
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ps_activity_take_photo_crop);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.ps_colorPrimaryDark));
+        PSStatusBarUtil.setColor(this, getResources().getColor(PSConfigUtil.getInstance().getStatusBarColor()));
         init();
     }
 

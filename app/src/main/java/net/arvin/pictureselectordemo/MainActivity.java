@@ -50,7 +50,8 @@ public class MainActivity extends BaseActivity {
 
         PSConfigUtil.getInstance().setCanCrop(true)
                 .setCanTakePhoto(true)
-                .setMaxCount(1);
+                .setMaxCount(1)
+                .setStatusBarColor(R.color.ps_colorPrimaryDark);
     }
 
     private void initView() {

@@ -16,8 +16,7 @@ import net.arvin.pictureselector.listeners.OnItemClickListener;
 import net.arvin.pictureselector.listeners.OnItemSelectedListener;
 import net.arvin.pictureselector.utils.PSConfigUtil;
 import net.arvin.pictureselector.utils.PSGlideUtil;
-import net.arvin.pictureselector.utils.ScreenUtil;
-import net.arvin.pictureselector.views.SquareImageView;
+import net.arvin.pictureselector.utils.PSScreenUtil;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class PictureSelectorAdapter extends RecyclerView.Adapter {
     private static final int TYPE_TAKE_PHOTO = 1;
     private static final int TYPE_NORMAL = 2;
 
-    private final int imgHeight = ScreenUtil.getScreenWidth() / 3;
+    private final int imgHeight = PSScreenUtil.getScreenWidth() / 3;
 
     private Context mContext;
     private List<ImageEntity> mItems;

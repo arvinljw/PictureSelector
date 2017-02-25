@@ -52,10 +52,12 @@
 		android:resource="@xml/file_paths" />
 </provider>
 
+<!--图片选择首页-->
 <activity
     android:name="net.arvin.pictureselector.uis.PictureSelectorActivity"
     android:screenOrientation="portrait" />
     
+<!--只拍照和裁剪-->
 <activity
 	android:name="net.arvin.pictureselector.uis.TakePhotoAndCropActivity"
 	android:screenOrientation="portrait" />
@@ -63,31 +65,19 @@
 
 注意：provider的android:authorities属性把项目包名换成该项目的包名，因为在手机中，这个属性是不能重复的。
 
-* 在res文件夹下创建xml文件夹，再创建file_paths.xml文件，内容如下：
-
-```
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <paths>
-        <external-path
-            name="camera_photos"
-            path="" />
-    </paths>
-</resources>
-```
-该配置的含义这里就不解释了，想了解的可以去看看[这里](https://developer.android.com/reference/android/support/v4/content/FileProvider.html)
-
 2、修改默认配置
 
 ```
 ／／这是默认设置
 PSConfigUtil.getInstance().setCanCrop(false)
                 .setCanTakePhoto(true)
-                .setMaxCount(9);
+                .setMaxCount(9)
+                .setStatusBarColor(R.color.ps_colorPrimaryDark);
 ```
 * setCanCrop 是否能裁剪，只有maxCount为1时才有效；
 * setCanTakePhoto 是否支持拍照；
-* setMaxCount 设置一次最多可选择图片的数量
+* setMaxCount 设置一次最多可选择图片的数量；
+* setStatusBarColor 设置状态栏颜色，默认为值"#2f3034"。
 
 3、启动PictureSelector：
 

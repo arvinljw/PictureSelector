@@ -9,7 +9,7 @@ import android.view.WindowManager;
  * 屏幕尺寸相关方法
  */
 @SuppressWarnings("all")
-public class ScreenUtil {
+public class PSScreenUtil {
     public static int getScreenWidth() {
         return Resources.getSystem().getDisplayMetrics().widthPixels;
     }

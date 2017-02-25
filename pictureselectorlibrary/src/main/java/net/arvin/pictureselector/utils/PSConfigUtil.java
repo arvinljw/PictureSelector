@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 
+import net.arvin.pictureselector.R;
 import net.arvin.pictureselector.entities.ImageEntity;
 import net.arvin.pictureselector.uis.PictureSelectorActivity;
 import net.arvin.pictureselector.uis.TakePhotoAndCropActivity;
@@ -43,12 +44,18 @@ public class PSConfigUtil {
      */
     private int mSelectedFolderPos;
 
+    /**
+     * 状态栏颜色
+     */
+    private int mStatusBarColor;
+
     private PSConfigUtil() {
         this.mMaxCount = 9;
         this.canTakePhoto = true;
         this.canCrop = false;
         this.mSelectedCount = 0;
         this.mSelectedFolderPos = 0;
+        this.mStatusBarColor = R.color.ps_colorPrimaryDark;
     }
 
     public static PSConfigUtil getInstance() {
@@ -136,6 +143,15 @@ public class PSConfigUtil {
         this.mSelectedFolderPos = selectedFolderPos;
     }
 
+    public int getStatusBarColor() {
+        return mStatusBarColor;
+    }
+
+    public PSConfigUtil setStatusBarColor(int mStatusBarColor) {
+        this.mStatusBarColor = mStatusBarColor;
+        return getInstance();
+    }
+
     public void showSelector(Activity activity, int requestCode, ArrayList<ImageEntity> selectedImages) {
         initAuthorities(activity);
         Intent intent = new Intent(activity, PictureSelectorActivity.class);
@@ -148,7 +164,7 @@ public class PSConfigUtil {
 //            }else{
 //                realSelectedImages.addAll(selectedImages);
 //            }
-            if (selectedImages.size() > getMaxCount()){
+            if (selectedImages.size() > getMaxCount()) {
                 throw new RuntimeException("selectedImages' size can not more than maxCount!");
             }
         }

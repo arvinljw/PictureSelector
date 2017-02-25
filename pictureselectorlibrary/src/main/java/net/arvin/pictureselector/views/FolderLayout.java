@@ -2,20 +2,19 @@ package net.arvin.pictureselector.views;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
 import net.arvin.pictureselector.R;
-import net.arvin.pictureselector.utils.ScreenUtil;
+import net.arvin.pictureselector.utils.PSScreenUtil;
 
 /**
  * created by arvin on 16/9/3 12:11
  * email：1035407623@qq.com
  */
 public class FolderLayout extends FrameLayout {
-    private final int dividerHeight = ScreenUtil.dp2px(1);
+    private final int dividerHeight = PSScreenUtil.dp2px(1);
     private final int outerDividerColor = R.color.black_hint;
     private final int innerDividerColor = R.color.black_secondary;
     private Paint paint;

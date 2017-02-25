@@ -11,14 +11,14 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 import net.arvin.pictureselector.R;
-import net.arvin.pictureselector.utils.ScreenUtil;
+import net.arvin.pictureselector.utils.PSScreenUtil;
 
 /**
  * Created by arvin on 2016/8/30 09:35
  */
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     private Drawable mDivider;
-    private int dividerHeight = ScreenUtil.dp2px(1);
+    private int dividerHeight = PSScreenUtil.dp2px(1);
 
     @SuppressWarnings("ResourceType")
     public DividerGridItemDecoration(Context context) {

@@ -4,18 +4,17 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.AttributeSet;
 import android.view.View;
 
-import net.arvin.pictureselector.utils.ScreenUtil;
+import net.arvin.pictureselector.utils.PSScreenUtil;
 
 /**
  * Created by arvin on 2016/8/29 10:59
  */
 public class ScrollDownHideBehavior extends CoordinatorLayout.Behavior {
-    private final int MIN_SCROLL_DISTANCE = ScreenUtil.dp2px(8);
+    private final int MIN_SCROLL_DISTANCE = PSScreenUtil.dp2px(8);
     private int offsetTotal = 0;
     private boolean isShow = true;
     private ObjectAnimator downHideAnim = null;
@@ -52,7 +51,7 @@ public class ScrollDownHideBehavior extends CoordinatorLayout.Behavior {
     }
 
     private void startDownHideAnim(View child) {
-        downHideAnim = ObjectAnimator.ofFloat(child, "translationY", 0, ScreenUtil.getScreenHeight() - child.getTop());
+        downHideAnim = ObjectAnimator.ofFloat(child, "translationY", 0, PSScreenUtil.getScreenHeight() - child.getTop());
         if (upShowAnim != null) {
             upShowAnim.cancel();
         }

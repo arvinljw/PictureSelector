@@ -1,7 +1,6 @@
 package net.arvin.pictureselector.uis;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -16,7 +15,7 @@ import net.arvin.pictureselector.uis.fragments.PictureSelectorFragment;
 import net.arvin.pictureselector.uis.fragments.ReviewFragment;
 import net.arvin.pictureselector.utils.PSConfigUtil;
 import net.arvin.pictureselector.utils.PSConstanceUtil;
-import net.arvin.pictureselector.utils.StatusBarUtil;
+import net.arvin.pictureselector.utils.PSStatusBarUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,7 +42,7 @@ public class PictureSelectorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ps_activity_picture_selector);
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.ps_colorPrimaryDark));
+        PSStatusBarUtil.setColor(this, getResources().getColor(PSConfigUtil.getInstance().getStatusBarColor()));
         init();
 
         showFragmentById(PictureSelector, getIntent().getExtras());

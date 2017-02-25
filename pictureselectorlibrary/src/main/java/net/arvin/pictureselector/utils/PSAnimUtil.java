@@ -2,9 +2,7 @@ package net.arvin.pictureselector.utils;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.view.View;
 
 /**
@@ -18,7 +16,7 @@ public class PSAnimUtil {
     private static ObjectAnimator upHideAnim;
 
     public static ObjectAnimator startDownHideAnim(View view) {
-        downHideAnim = ObjectAnimator.ofFloat(view, "translationY", 0, ScreenUtil.getScreenHeight() - view.getTop());
+        downHideAnim = ObjectAnimator.ofFloat(view, "translationY", 0, PSScreenUtil.getScreenHeight() - view.getTop());
         if (upShowAnim != null) {
             upShowAnim.cancel();
         }
