@@ -66,6 +66,7 @@ public class MainActivity extends BaseActivity {
         tvSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                selectedImages.clear();
                 v.setSelected(!v.isSelected());
                 tvSwitch.setText(v.isSelected() ? "单选" : "多选");
                 PSConfigUtil.getInstance().setMaxCount(v.isSelected() ? 1 : 9);
