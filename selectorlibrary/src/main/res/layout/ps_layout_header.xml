@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/ps_layout_header"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/ps_spacing_tab_bar"
+              android:background="@color/ps_colorPrimary"
+              android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/ps_img_back"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/ps_spacing_default"
+        android:paddingRight="@dimen/ps_spacing_default"
+        android:src="@drawable/ps_back_white"/>
+
+    <View
+        android:id="@+id/ps_divider_line"
+        android:layout_width="@dimen/ps_spacing_one"
+        android:layout_height="24dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/ps_spacing_default"
+        android:background="@color/ps_colorPrimaryDark"/>
+
+    <TextView
+        android:id="@+id/ps_tv_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
+        android:text="@string/ps_title_pic"
+        android:textColor="@color/ps_white_normal"
+        android:textSize="@dimen/ps_txt_title"/>
+
+    <TextView
+        android:id="@+id/ps_tv_ensure"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/ps_spacing_ten"
+        android:layout_marginRight="@dimen/ps_spacing_twelve"
+        android:layout_marginTop="@dimen/ps_spacing_ten"
+        android:background="@drawable/ps_ensure_btn_bg"
+        android:enabled="false"
+        android:gravity="center"
+        android:minWidth="@dimen/ps_spacing_float_btn"
+        android:paddingLeft="@dimen/ps_spacing_small"
+        android:paddingRight="@dimen/ps_spacing_small"
+        android:text="@string/ps_ensure"
+        android:textColor="@drawable/ps_ensure_btn_text_color"
+        android:textSize="@dimen/ps_txt_normal_content"
+        />
+
+</LinearLayout>

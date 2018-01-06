@@ -61,7 +61,7 @@
 
 <!--图片选择首页-->
 <activity
-    android:name="net.arvin.pictureselector.uis.PictureSelectorActivity"
+    android:name="net.arvin.pictureselector.uis.SelectorActivity"
     android:screenOrientation="portrait" />
     
 <!--只拍照和裁剪-->

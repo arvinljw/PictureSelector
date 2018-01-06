@@ -3,145 +3,98 @@ package net.arvin.pictureselectordemo;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
+import com.bumptech.glide.request.RequestOptions;
 
-import net.arvin.pictureselector.entities.ImageEntity;
-import net.arvin.pictureselector.utils.PSConfigUtil;
-import net.arvin.pictureselector.utils.PSConstanceUtil;
-import net.arvin.pictureselector.utils.PSGlideUtil;
+import net.arvin.selector.PSSelectorHelper;
+import net.arvin.selector.data.ConstantData;
+import net.arvin.selector.uis.views.photoview.PhotoView;
+import net.arvin.selector.utils.PSGlideUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends BaseActivity {
-    private final String KEY_COUNT = "count";
-    private final String KEY_CROP = "canCrop";
-    private final int REQUEST_CODE_1 = 1001;
-    private final int REQUEST_CODE_2 = 1002;
+    private RadioButton mRbSingleYes;
+    private RadioButton mRbCropYes;
+    private RadioButton mRbCameraYes;
 
-    private ImageView img;
-    private TextView tvSwitch;
+    private EditText mEdMaxCount;
 
-    private ArrayList<ImageEntity> selectedImages;
+    private PhotoView mImage;
 
-    @SuppressWarnings("ConstantConditions")
+    private ArrayList<String> selectedPictures = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initData();
 
-        initView();
+        mImage = findViewById(R.id.image);
 
-        initEvent();
-    }
+        PSGlideUtil.loadImage(this, R.drawable.ps_icon, mImage);
 
-    private void initData() {
-        selectedImages = new ArrayList<>();
+        mEdMaxCount = findViewById(R.id.ed_max_count);
+        mRbSingleYes = findViewById(R.id.rb_single_yes);
+        mRbCropYes = findViewById(R.id.rb_crop_yes);
+        mRbCameraYes = findViewById(R.id.rb_camera_yes);
 
-        PSConfigUtil.getInstance().setCanCrop(true)
-                .setCanTakePhoto(true)
-                .setMaxCount(1)
-                .setStatusBarColor(R.color.ps_colorPrimaryDark);
-    }
-
-    private void initView() {
-        img = (ImageView) findViewById(R.id.img_test);
-        tvSwitch = (TextView) findViewById(R.id.tv_switch);
-
-        tvSwitch.setSelected(PSConfigUtil.getInstance().getMaxCount() == 1);
-        tvSwitch.setText(tvSwitch.isSelected() ? "单选" : "多选");
-    }
-
-    private void initEvent() {
-        tvSwitch.setOnClickListener(new View.OnClickListener() {
+        RadioGroup rgSingle = findViewById(R.id.rg_single);
+        final RadioGroup rgCrop = findViewById(R.id.rg_crop);
+        rgSingle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                selectedImages.clear();
-                v.setSelected(!v.isSelected());
-                tvSwitch.setText(v.isSelected() ? "单选" : "多选");
-                PSConfigUtil.getInstance().setMaxCount(v.isSelected() ? 1 : 9);
-            }
-        });
-
-        findViewById(R.id.tv_open_gallery).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openPs();
-            }
-        });
-        findViewById(R.id.tv_open_camera).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openCamera();
-            }
-        });
-
-        findViewById(R.id.tv_clear).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //建议异步操作,如果文件过多则同样耗时
-                PSConfigUtil.clearCache();
-                Toast.makeText(MainActivity.this, "清除成功~", Toast.LENGTH_SHORT).show();
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rb_single_no) {
+                    mEdMaxCount.setText("");
+                    mEdMaxCount.setVisibility(View.VISIBLE);
+                    rgCrop.setVisibility(View.GONE);
+                    rgCrop.check(R.id.rb_crop_no);
+                } else {
+                    mEdMaxCount.setVisibility(View.GONE);
+                    rgCrop.setVisibility(View.VISIBLE);
+                }
             }
         });
     }
 
-    private void openPs() {
-        String perms[] = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    public void selectPicture(View v) {
         checkPermission(new CheckPermListener() {
             @Override
             public void agreeAllPermission() {
-                PSConfigUtil.getInstance().showSelector(MainActivity.this, REQUEST_CODE_1, selectedImages);
-            }
-        }, "获取相片需要使用相机和内存读写权限", perms);
-    }
+                if (mRbSingleYes.isChecked()) {
+                    PSSelectorHelper.selectPicture(MainActivity.this, mRbCropYes.isChecked(),
+                            mRbCameraYes.isChecked(), 1001);
+                } else {
+                    int maxCount;
+                    try {
+                        maxCount = Integer.valueOf(mEdMaxCount.getText().toString().trim());
+                    } catch (Exception e) {
+                        maxCount = 9;
+                    }
+                    PSSelectorHelper.selectPictures(MainActivity.this, maxCount,
+                            mRbCameraYes.isChecked(), selectedPictures, 1001);
+                }
 
-    private void openCamera() {
-        String perms[] = {Manifest.permission.CAMERA};
-        checkPermission(new CheckPermListener() {
-            @Override
-            public void agreeAllPermission() {
-                PSConfigUtil.getInstance().showTakePhotoAndCrop(MainActivity.this, REQUEST_CODE_2);
+
             }
-        }, "拍照需要使用相机权限", perms);
+        }, "需要拍照和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CODE_1: {
-                    selectedImages.clear();
-                    List<ImageEntity> temp = data.getParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED);
-                    selectedImages.addAll(temp);
-
-                    PSGlideUtil.loadImage(this, "file://" + temp.get(0).getPath(), img);
-                    for (ImageEntity selectedImage : selectedImages) {
-                        Log.d("back_data", selectedImage.getPath());
-                    }
-                    break;
-                }
-                case REQUEST_CODE_2: {
-                    selectedImages.clear();
-                    List<ImageEntity> temp = data.getParcelableArrayListExtra(PSConstanceUtil.PASS_SELECTED);
-                    selectedImages.addAll(temp);
-
-                    PSGlideUtil.loadImage(this, "file://" + temp.get(0).getPath(), img);
-                    for (ImageEntity selectedImage : selectedImages) {
-                        Log.d("back_data", selectedImage.getPath());
-                    }
-                    break;
+            if (requestCode == 1001) {
+                ArrayList<String> backPics = data.getStringArrayListExtra(ConstantData.KEY_BACK_PICTURES);
+                if (backPics != null && backPics.size() > 0) {
+                    selectedPictures.clear();
+                    selectedPictures.addAll(backPics);
+                    PSGlideUtil.loadImage(this, backPics.get(0), mImage);
                 }
             }
         }
@@ -149,28 +102,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void backFromSetting() {
-        super.backFromSetting();
-        openPs();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        outState.putInt(KEY_COUNT, PSConfigUtil.getInstance().getMaxCount());
-        outState.putBoolean(KEY_CROP, PSConfigUtil.getInstance().isCanCrop());
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        PSConfigUtil.getInstance()
-                .setMaxCount(savedInstanceState.getInt(KEY_COUNT))
-                .setCanCrop(savedInstanceState.getBoolean(KEY_CROP));
-    }
-
-    @Override
-    protected void onDestroy() {
-        PSConfigUtil.clearCache();
-        super.onDestroy();
+        selectPicture(null);
     }
 }

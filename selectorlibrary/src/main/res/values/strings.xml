@@ -1,0 +1,19 @@
+<resources>
+    <string name="ps_lib_name">PicSelector</string>
+    <string name="ps_not_support">暂时不支持该类型</string>
+    <string name="ps_title_pic">图片</string>
+    <string name="ps_cancel">取消</string>
+    <string name="ps_ensure">完成</string>
+    <string name="ps_ensure_single">使用</string>
+    <string name="ps_all_image">所有图片</string>
+    <string name="ps_review">预览</string>
+    <string name="ps_review_count">预览(%1$d)</string>
+    <string name="ps_max_count_tips">你最多只能选择%1$s张照片</string>
+    <string name="ps_cant_add">已达到最大数量</string>
+    <string name="ps_review_edit">编辑</string>
+    <string name="ps_review_choose">选择</string>
+    <string name="ps_ensure_count">完成(%1$d/%2$d)</string>
+    <string name="ps_title_pic_count">%1$d/%2$d</string>
+    <string name="ps_loading">加载中...</string>
+    <string name="ps_image_count">%1$d 张</string>
+</resources>

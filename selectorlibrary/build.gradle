@@ -1,0 +1,26 @@
+apply plugin: 'com.android.library'
+
+android {
+    def android = rootProject.ext.android
+    compileSdkVersion android.compileSdkVersion as int
+    buildToolsVersion android.buildToolsVersion as String
+
+    defaultConfig {
+        minSdkVersion android.minSdkVersion as int
+        targetSdkVersion android.targetSdkVersion as int
+    }
+}
+
+dependencies {
+    def dependencies = rootProject.ext.dependencies
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile dependencies.support_v7
+    compile dependencies.recyclerview
+
+    compile (dependencies.glide){
+        exclude group: 'com.android.support'
+    }
+    annotationProcessor dependencies.glidecompiler
+    compile (dependencies.annotations)
+    compile (dependencies.exifinterface)
+}

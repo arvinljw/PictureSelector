@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/ps_colorPrimaryDark"
+              android:orientation="vertical">
+
+    <include layout="@layout/ps_layout_header"/>
+
+    <net.arvin.selector.uis.views.CropImageLayout
+        android:id="@+id/ps_layout_crop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/ps_colorPrimaryDark"
+              android:orientation="vertical">
+
+    <include layout="@layout/ps_layout_header"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ps_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="@dimen/ps_spacing_one"/>
+
+    <RelativeLayout
+        android:id="@+id/layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ps_spacing_tab_bar"
+        android:layout_gravity="bottom"
+        android:background="@color/ps_colorPrimary">
+
+        <TextView
+            android:id="@+id/ps_tv_folder_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:drawablePadding="@dimen/ps_spacing_four"
+            android:drawableRight="@drawable/ps_selector_icon_more"
+            android:gravity="bottom"
+            android:paddingBottom="@dimen/ps_spacing_default"
+            android:paddingLeft="@dimen/ps_spacing_default"
+            android:paddingRight="@dimen/ps_spacing_default"
+            android:paddingTop="15dp"
+            android:text="@string/ps_all_image"
+            android:textColor="@color/ps_review_text_color"
+            android:textSize="@dimen/ps_txt_big_content" />
+
+        <TextView
+            android:id="@+id/ps_tv_review"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:enabled="false"
+            android:gravity="center"
+            android:paddingLeft="@dimen/ps_spacing_default"
+            android:paddingRight="@dimen/ps_spacing_default"
+            android:text="@string/ps_review"
+            android:textColor="@color/ps_review_text_color"
+            android:textSize="@dimen/ps_txt_big_content" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,14 +1,22 @@
 ext {
     android = [
-            buildToolsVersion: "24.0.0",
+            buildToolsVersion: "26.0.2",
             minSdkVersion    : 14,
-            targetSdkVersion : 24,
-            compileSdkVersion: 24,
+            targetSdkVersion : 26,
+            compileSdkVersion: 26,
             versionCode      : 2,
             versionName      : "1.0.1",
     ]
 
+    def googleSupportVersion = "26.1.0"
+
     dependencies = [
-            googleSupportVersion: "24.2.1"
+            support_v7   : "com.android.support:appcompat-v7:${googleSupportVersion}",
+            support_v4   : "com.android.support:support-v4:${googleSupportVersion}",
+            recyclerview : "com.android.support:recyclerview-v7:${googleSupportVersion}",
+            glide        : "com.github.bumptech.glide:glide:4.4.0",
+            glidecompiler: "com.github.bumptech.glide:compiler:4.4.0",
+            annotations  : "com.android.support:support-annotations:${googleSupportVersion}",
+            exifinterface: "com.android.support:exifinterface:${googleSupportVersion}",
     ]
 }

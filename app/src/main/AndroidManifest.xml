@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.arvin.pictureselectordemo">
+          package="net.arvin.pictureselectordemo">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ps_icon"
-        android:label="@string/lib_name"
+        android:label="@string/ps_lib_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -20,23 +21,21 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
+                android:resource="@xml/ps_file_paths"/>
         </provider>
 
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
 
         <activity
-            android:name="net.arvin.pictureselector.uis.PictureSelectorActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="net.arvin.pictureselector.uis.TakePhotoAndCropActivity"
-            android:screenOrientation="portrait" />
+            android:name="net.arvin.selector.uis.SelectorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/TransparentTheme"/>
     </application>
 
 </manifest>

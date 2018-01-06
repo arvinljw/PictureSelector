@@ -23,8 +23,7 @@ public abstract class BaseActivity extends AppCompatActivity implements EasyPerm
             if (mListener != null)
                 mListener.agreeAllPermission();
         } else {
-            EasyPermissions.requestPermissions(this, resString,
-                    RC_PERM, mPerms);
+            EasyPermissions.requestPermissions(this, resString, RC_PERM, mPerms);
         }
     }
 

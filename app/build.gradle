@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    def globalConfig = rootProject.ext.android
-    compileSdkVersion globalConfig.compileSdkVersion as int
-    buildToolsVersion globalConfig.buildToolsVersion as String
+    def android = rootProject.ext.android
+    compileSdkVersion android.compileSdkVersion as int
+    buildToolsVersion android.buildToolsVersion as String
 
     defaultConfig {
-        minSdkVersion globalConfig.minSdkVersion as int
-        targetSdkVersion globalConfig.targetSdkVersion as int
-        versionCode globalConfig.versionCode as int
-        versionName globalConfig.versionName as String
+        minSdkVersion android.minSdkVersion as int
+        targetSdkVersion android.targetSdkVersion as int
+        versionCode android.versionCode as int
+        versionName android.versionName as String
     }
     buildTypes {
         release {
@@ -20,10 +20,7 @@ android {
 }
 
 dependencies {
-    def googleDependencies = rootProject.ext.dependencies.googleSupportVersion
+    def dependencies = rootProject.ext.dependencies
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
-    compile "com.android.support:appcompat-v7:${googleDependencies}"
-    compile project(':pictureselectorlibrary')
-//    compile 'net.arvin.pictureselector:pictureselectorlibrary:1.0.0'
+    compile project(':selectorlibrary')
 }

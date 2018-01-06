@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/ps_img_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@color/ps_colorPrimaryDark" />
+
+    <FrameLayout
+        android:id="@+id/ps_layout_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/ps_spacing_four">
+
+        <ImageView
+            android:id="@+id/ps_img_selector"
+            android:layout_width="@dimen/ps_spacing_default"
+            android:layout_height="@dimen/ps_spacing_default"
+            android:src="@drawable/ps_checked_bg" />
+    </FrameLayout>
+
+</RelativeLayout>
