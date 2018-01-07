@@ -1,13 +1,36 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='com.github.arvinljw'
 
 android {
-    def android = rootProject.ext.android
-    compileSdkVersion android.compileSdkVersion as int
-    buildToolsVersion android.buildToolsVersion as String
+    def version = rootProject.ext.version
+    compileSdkVersion version.compileSdkVersion as int
+    buildToolsVersion version.buildToolsVersion as String
 
     defaultConfig {
-        minSdkVersion android.minSdkVersion as int
-        targetSdkVersion android.targetSdkVersion as int
+        minSdkVersion version.minSdkVersion as int
+        targetSdkVersion version.targetSdkVersion as int
+    }
+    // build a jar with source files
+    task sourcesJar(type: Jar) {
+        from android.sourceSets.main.java.srcDirs
+        classifier = 'sources'
+    }
+    task javadoc(type: Javadoc) {
+        failOnError  false
+        source = android.sourceSets.main.java.sourceFiles
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+        classpath += configurations.compile
+    }
+// build a jar with javadoc
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
+    artifacts {
+        archives sourcesJar
+        archives javadocJar
     }
 }
 

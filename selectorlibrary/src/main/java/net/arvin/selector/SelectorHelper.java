@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Function：
  * Desc：选择图片或者视频的外观类，可直接调用
  */
-public class PSSelectorHelper extends ConstantData {
+public class SelectorHelper extends ConstantData {
 
     /**
      * 单选图片，不裁剪，带相机

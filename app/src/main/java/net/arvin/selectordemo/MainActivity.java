@@ -1,18 +1,14 @@
-package net.arvin.pictureselectordemo;
+package net.arvin.selectordemo;
 
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
-import net.arvin.selector.PSSelectorHelper;
+import net.arvin.selector.SelectorHelper;
 import net.arvin.selector.data.ConstantData;
 import net.arvin.selector.uis.views.photoview.PhotoView;
 import net.arvin.selector.utils.PSGlideUtil;
@@ -67,7 +63,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void agreeAllPermission() {
                 if (mRbSingleYes.isChecked()) {
-                    PSSelectorHelper.selectPicture(MainActivity.this, mRbCropYes.isChecked(),
+                    SelectorHelper.selectPicture(MainActivity.this, mRbCropYes.isChecked(),
                             mRbCameraYes.isChecked(), 1001);
                 } else {
                     int maxCount;
@@ -76,7 +72,7 @@ public class MainActivity extends BaseActivity {
                     } catch (Exception e) {
                         maxCount = 9;
                     }
-                    PSSelectorHelper.selectPictures(MainActivity.this, maxCount,
+                    SelectorHelper.selectPictures(MainActivity.this, maxCount,
                             mRbCameraYes.isChecked(), selectedPictures, 1001);
                 }
 

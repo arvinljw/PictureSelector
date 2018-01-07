@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
-    def android = rootProject.ext.android
-    compileSdkVersion android.compileSdkVersion as int
+    def version = rootProject.ext.version
+    compileSdkVersion version.compileSdkVersion as int
     buildToolsVersion android.buildToolsVersion as String
 
     defaultConfig {
-        minSdkVersion android.minSdkVersion as int
-        targetSdkVersion android.targetSdkVersion as int
-        versionCode android.versionCode as int
-        versionName android.versionName as String
+        applicationId "net.arvin.selectordemp"
+        minSdkVersion version.minSdkVersion as int
+        targetSdkVersion version.targetSdkVersion as int
+        versionCode version.versionCode as int
+        versionName version.versionName as String
     }
     buildTypes {
         release {
