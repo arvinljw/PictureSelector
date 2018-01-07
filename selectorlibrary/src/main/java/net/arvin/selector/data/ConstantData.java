@@ -27,6 +27,8 @@ public class ConstantData {
     public static final int VALUE_TYPE_VIDEO = 1;
     //选图片或视频
     public static final int VALUE_TYPE_PICTURE_VIDEO = 2;
+    //直接打开相机
+    public static final int VALUE_TYPE_CAMERA = 3;
 
     public static final int VALUE_SPAN_COUNT = 4;
 
@@ -61,7 +63,7 @@ public class ConstantData {
     public static final int VALUE_CHANGE_FRAGMENT_REVIEW = 1;
     public static final int VALUE_CHANGE_FRAGMENT_CROP = 2;
     public static final int VALUE_CHANGE_FRAGMENT_TAKE_PHOTO = 3;
-    public static final int VALUE_CHANGE_FRAGMENT_EDIT = 3;
+    public static final int VALUE_CHANGE_FRAGMENT_EDIT = 4;
 
     public static final String KEY_ONLY_SHOW_SELECTED_PIC = "key_only_show_selected_pic";
     public static final boolean VALUE_ONLY_SHOW_SELECTED_PIC_DEFAULT = false;

@@ -12,6 +12,7 @@ import net.arvin.selector.entities.FileEntity;
 import net.arvin.selector.uis.views.CropImageLayout;
 import net.arvin.selector.utils.PSUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -69,8 +70,12 @@ public class CropFragment extends BaseFragment {
 
     @Override
     protected void onBackClicked() {
-        super.onBackClicked();
         isBacked = true;
+        if (mSelectType == ConstantData.VALUE_TYPE_CAMERA) {
+            getActivity().onBackPressed();
+            return;
+        }
+        super.onBackClicked();
     }
 
     @Override

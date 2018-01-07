@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,13 +85,14 @@ public abstract class BaseFragment extends Fragment {
                     onEnsureClicked();
                 }
             });
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            Log.d("HeaderLayout","Do not have Header.");
         }
     }
 
     protected void onBackClicked() {
         if (mTransactionListener != null) {
-            mTransactionListener.switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR, null);
+            mTransactionListener.switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR, getArguments());
         }
     }
 

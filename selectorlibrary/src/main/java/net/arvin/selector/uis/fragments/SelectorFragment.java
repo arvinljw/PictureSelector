@@ -70,7 +70,7 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
                 if (mData.size() > 0) {
                     ConstantData.setFolders(mData);
                     ArrayList<String> selectedItems = ConstantData.getSelectedItems();
-                    if(selectedItems!=null){
+                    if (selectedItems != null) {
                         selectedItems.clear();
                     }
 
@@ -151,7 +151,6 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
 
     @Override
     public void onItemSelected(View v, int selectedCount) {
-
         setEnsure(selectedCount);
         setReviewCount(selectedCount);
     }

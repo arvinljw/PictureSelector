@@ -117,12 +117,28 @@
             />
     </RadioGroup>
 
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="selectPicture"
-        android:text="选图片"
-        />
+        android:orientation="horizontal"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="selectPicture"
+            android:text="选图片"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:onClick="takePhoto"
+            android:text="拍照"
+            />
+
+    </LinearLayout>
 
     <net.arvin.selector.uis.views.photoview.PhotoView
         android:id="@+id/image"

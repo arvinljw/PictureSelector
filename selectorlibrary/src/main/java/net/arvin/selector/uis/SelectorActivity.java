@@ -50,7 +50,8 @@ public class SelectorActivity extends AppCompatActivity implements TransactionLi
             return;
         }
 
-        if(bundle.getInt(ConstantData.KEY_TYPE_SELECT) != ConstantData.VALUE_TYPE_PICTURE){
+        int type = bundle.getInt(ConstantData.KEY_TYPE_SELECT, ConstantData.VALUE_TYPE_PICTURE);
+        if (type != ConstantData.VALUE_TYPE_PICTURE && type != ConstantData.VALUE_TYPE_CAMERA) {
             PSToastUtil.showToast(R.string.ps_not_support);
             onBackPressed();
             return;
@@ -58,7 +59,11 @@ public class SelectorActivity extends AppCompatActivity implements TransactionLi
 
         initFragmentInfo();
 
-        switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR, bundle);
+        if (type == ConstantData.VALUE_TYPE_CAMERA) {
+            switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_TAKE_PHOTO, bundle);
+        } else {
+            switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR, bundle);
+        }
     }
 
     private void initFragmentInfo() {

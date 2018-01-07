@@ -18,6 +18,14 @@ import java.util.ArrayList;
 public class SelectorHelper extends ConstantData {
 
     /**
+     * 拍照，是否裁剪
+     */
+    public static void takePhoto(Activity activity, boolean canCrop, int requestCode) {
+        select(activity, VALUE_TYPE_CAMERA, VALUE_SINGLE_SELECTION_TRUE, canCrop, VALUE_COUNT_SINGLE,
+                VALUE_WITH_CAMERA_TRUE, VALUE_SELECTED_PICTURES_NULL, VALUE_SELECTED_PICTURES_NULL, requestCode);
+    }
+
+    /**
      * 单选图片，不裁剪，带相机
      */
     public static void selectPicture(Activity activity, int requestCode) {
@@ -124,7 +132,7 @@ public class SelectorHelper extends ConstantData {
     /**
      * 去选择图片或视频
      *
-     * @param type             可选值{@link #VALUE_TYPE_PICTURE}{@link #VALUE_TYPE_VIDEO}{@link #VALUE_TYPE_PICTURE_VIDEO}
+     * @param type             可选值{@link #VALUE_TYPE_PICTURE}{@link #VALUE_TYPE_VIDEO}{@link #VALUE_TYPE_PICTURE_VIDEO}{@link #VALUE_TYPE_CAMERA}
      * @param singleSelection  是否单选
      * @param canCrop          是否裁剪
      * @param maxCount         最大数量

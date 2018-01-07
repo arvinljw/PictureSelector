@@ -8,7 +8,7 @@
 
 2、功能：**多选、单选、拍照、预览、裁剪、大图、支持7.0**
 
-3、TODO：增加**直接拍照裁剪类型，多选时图片编辑功能，视频选择功能**
+3、TODO：增加**多选时图片编辑功能，视频选择功能**
 
 ### Demo下载
 
@@ -39,7 +39,7 @@ allprojects {
 ```
 dependencies {
     ...
-    compile 'com.github.arvinljw:PictureSelector:v2.0.1'
+    compile 'com.github.arvinljw:PictureSelector:v2.0.2'
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 ```
 dependencies {
     ...
-    compile ('com.github.arvinljw:PictureSelector:v2.0.1'){
+    compile ('com.github.arvinljw:PictureSelector:v2.0.2'){
         exclude group: 'com.android.support'
     }
 }
@@ -102,7 +102,7 @@ dependencies {
 /**
  * 去选择图片或视频
  *
- * @param type             可选值{@link #VALUE_TYPE_PICTURE}{@link #VALUE_TYPE_VIDEO}{@link #VALUE_TYPE_PICTURE_VIDEO}
+ * @param type             可选值{@link #VALUE_TYPE_PICTURE}{@link #VALUE_TYPE_VIDEO}{@link #VALUE_TYPE_PICTURE_VIDEO}{@link #VALUE_TYPE_CAMERA}
  * @param singleSelection  是否单选
  * @param canCrop          是否裁剪
  * @param maxCount         最大数量
@@ -134,6 +134,13 @@ private static void select(Activity activity, int type, boolean singleSelection,
 其实方法贴出来，也有注释就不用多说大家都明白了。**这里暂时还只支持选择图片。**
 
 ```
+/**
+ * 拍照，是否裁剪
+ */
+public static void takePhoto(Activity activity, boolean canCrop, int requestCode) {
+    select(activity, VALUE_TYPE_CAMERA, VALUE_SINGLE_SELECTION_TRUE, canCrop, VALUE_COUNT_SINGLE,
+            VALUE_WITH_CAMERA_TRUE, VALUE_SELECTED_PICTURES_NULL, VALUE_SELECTED_PICTURES_NULL, requestCode);
+}
 /**
  * 单选图片，不裁剪，带相机
  */

@@ -6,7 +6,7 @@ android {
     buildToolsVersion android.buildToolsVersion as String
 
     defaultConfig {
-        applicationId "net.arvin.selectordemp"
+        applicationId "net.arvin.selectordemo"
         minSdkVersion version.minSdkVersion as int
         targetSdkVersion version.targetSdkVersion as int
         versionCode version.versionCode as int
@@ -23,6 +23,6 @@ android {
 dependencies {
     def dependencies = rootProject.ext.dependencies
     compile fileTree(include: ['*.jar'], dir: 'libs')
-//    compile project(':selectorlibrary')
-    compile 'com.github.arvinljw:PictureSelector:v2.0.1'
+    compile project(':selectorlibrary')
+//    compile 'com.github.arvinljw:PictureSelector:v2.0.1'
 }

@@ -81,6 +81,15 @@ public class MainActivity extends BaseActivity {
         }, "需要拍照和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
     }
 
+    public void takePhoto(View v) {
+        checkPermission(new CheckPermListener() {
+            @Override
+            public void agreeAllPermission() {
+                SelectorHelper.takePhoto(MainActivity.this, mRbCropYes.isChecked(), 1001);
+            }
+        }, "需要拍照和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

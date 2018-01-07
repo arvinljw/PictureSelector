@@ -1,15 +1,20 @@
 package net.arvin.selector.uis.fragments;
 
 import android.content.Intent;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import net.arvin.selector.R;
 import net.arvin.selector.data.ConstantData;
+import net.arvin.selector.entities.FileEntity;
 import net.arvin.selector.utils.PSUtil;
 
 import java.io.File;
@@ -41,10 +46,6 @@ public class TakePhotoFragment extends BaseFragment {
     @Override
     protected ArrayList<String> getSelectedVideos() {
         return null;
-    }
-
-    @Override
-    protected void initHeader() {
     }
 
     @Override
@@ -112,9 +113,20 @@ public class TakePhotoFragment extends BaseFragment {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
                 case ConstantData.REQUEST_CODE_TAKE_PHOTO:
-                    if (mTransactionListener != null) {
-                        mTransactionListener.switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR,
-                                ConstantData.toSelectorBundle(getArguments(), mImagePath, ConstantData.VALUE_CHANGE_FRAGMENT_TAKE_PHOTO));
+                    if (mSelectType == ConstantData.VALUE_TYPE_CAMERA) {
+                        if (mCanCrop) {
+                            if (mTransactionListener != null) {
+                                mTransactionListener.switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_CROP,
+                                        ConstantData.toCropBundle(getArguments(), new FileEntity(mImagePath)));
+                            }
+                        } else {
+                            onEnsureClicked();
+                        }
+                    } else {
+                        if (mTransactionListener != null) {
+                            mTransactionListener.switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR,
+                                    ConstantData.toSelectorBundle(getArguments(), mImagePath, ConstantData.VALUE_CHANGE_FRAGMENT_TAKE_PHOTO));
+                        }
                     }
                     PSUtil.scanFile(getActivity(), mImagePath);
                     break;
@@ -124,4 +136,12 @@ public class TakePhotoFragment extends BaseFragment {
         onBackClicked();
     }
 
+    @Override
+    protected void onBackClicked() {
+        if (mSelectType == ConstantData.VALUE_TYPE_CAMERA) {
+            getActivity().onBackPressed();
+            return;
+        }
+        super.onBackClicked();
+    }
 }
