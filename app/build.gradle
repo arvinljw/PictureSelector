@@ -23,5 +23,6 @@ android {
 dependencies {
     def dependencies = rootProject.ext.dependencies
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':selectorlibrary')
+//    compile project(':selectorlibrary')
+    compile 'com.github.arvinljw:PictureSelector:v2.0.1'
 }
