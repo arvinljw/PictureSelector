@@ -140,9 +140,21 @@
 
     </LinearLayout>
 
-    <net.arvin.selector.uis.views.photoview.PhotoView
-        android:id="@+id/image"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="#eeeeee">
+
+        <net.arvin.selector.uis.views.photoview.PhotoView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <net.arvin.selector.uis.views.GraffitiView
+            android:id="@+id/layout_graffiti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </FrameLayout>
 
 </LinearLayout>

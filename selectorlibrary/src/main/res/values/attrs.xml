@@ -10,4 +10,8 @@
         <attr name="tileBackgroundColor" format="color"/>
     </declare-styleable>
 
+    <declare-styleable name="CircleView">
+        <attr name="ps_color" format="color|reference"/>
+        <attr name="ps_radius" format="dimension"/>
+    </declare-styleable>
 </resources>

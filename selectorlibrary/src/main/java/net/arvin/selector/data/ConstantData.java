@@ -158,4 +158,11 @@ public class ConstantData {
         bundle.putAll(baseBundle);
         return bundle;
     }
+
+    public static Bundle toEditBundle(Bundle baseBundle, FileEntity item) {
+        Bundle bundle = new Bundle();
+        bundle.putAll(baseBundle);
+        bundle.putParcelable(KEY_CURR_ITEM, item);
+        return bundle;
+    }
 }

@@ -34,7 +34,7 @@ public class FolderBackGroundLayout extends FrameLayout {
         setWillNotDraw(false);
         mPaint = new Paint();
         mPaint.setStrokeWidth(mDividerSize);
-        mPaint.setAntiAlias(false);
+        mPaint.setAntiAlias(true);
     }
 
     @Override

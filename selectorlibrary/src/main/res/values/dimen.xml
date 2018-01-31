@@ -8,10 +8,11 @@
     <dimen name="ps_spacing_small">8dp</dimen>
     <dimen name="ps_spacing_ten">10dp</dimen>
     <dimen name="ps_spacing_twelve">12dp</dimen>
+    <dimen name="ps_spacing_fourteen">14dp</dimen>
     <dimen name="ps_spacing_default">16dp</dimen>
     <dimen name="ps_spacing_twenty_four">24dp</dimen>
     <dimen name="ps_spacing_thirty_two">32dp</dimen>
-    <dimen name="ps_spacing_avatar">40dp</dimen>
+    <dimen name="ps_spacing_forty">40dp</dimen>
     <dimen name="ps_spacing_tab_bar">48dp</dimen>
     <dimen name="ps_spacing_app_bar">56dp</dimen>
     <dimen name="ps_spacing_float_btn">64dp</dimen>

@@ -80,6 +80,10 @@ public class PhotoView extends AppCompatImageView {
         return attacher.getImageMatrix();
     }
 
+    public Matrix getSuppMatrix(){
+        return attacher.getSuppMatrix();
+    }
+
     @Override
     public void setOnLongClickListener(OnLongClickListener l) {
         attacher.setOnLongClickListener(l);

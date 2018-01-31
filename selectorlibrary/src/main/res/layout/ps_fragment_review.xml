@@ -26,7 +26,6 @@
             android:gravity="center"
             android:paddingLeft="@dimen/ps_spacing_default"
             android:paddingRight="@dimen/ps_spacing_default"
-            android:visibility="gone"
             android:text="@string/ps_review_edit"
             android:textColor="@color/ps_white_normal"
             android:textSize="@dimen/ps_txt_big_content"/>

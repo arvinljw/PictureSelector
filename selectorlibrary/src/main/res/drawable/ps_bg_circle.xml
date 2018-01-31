@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/ps_spacing_tab_bar"/>
+    <solid android:color="@color/ps_white_normal"/>
+</shape>

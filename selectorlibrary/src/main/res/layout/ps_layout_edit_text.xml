@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<net.arvin.selector.uis.views.LayoutChangeLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ps_layout_edit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#aa000000"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ps_tv_cancel_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/ps_spacing_default"
+            android:text="@string/ps_cancel"
+            android:textColor="@color/ps_white_normal"
+            android:textSize="@dimen/ps_txt_big_content"
+            />
+
+        <TextView
+            android:id="@+id/ps_tv_ensure_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/ps_spacing_default"
+            android:text="@string/ps_ensure"
+            android:textColor="@color/ps_colorAccent"
+            android:textSize="@dimen/ps_txt_big_content"
+            />
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/ps_ed_text"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@null"
+        android:gravity="left|top"
+        android:padding="16dp"
+        android:textColor="@color/ps_paint_red"
+        android:textCursorDrawable="@null"
+        android:textSize="@dimen/ps_txt_title"
+        />
+
+    <net.arvin.selector.uis.views.ColorBarLayout
+        android:id="@+id/ps_edit_color_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingBottom="@dimen/ps_spacing_small"
+        android:paddingTop="@dimen/ps_spacing_small"/>
+
+</net.arvin.selector.uis.views.LayoutChangeLinearLayout>

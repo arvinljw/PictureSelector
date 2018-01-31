@@ -1,10 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:background="@color/ps_colorPrimaryDark"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black"
+                android:orientation="vertical">
 
+    <FrameLayout
+        android:id="@+id/ps_layout_compose"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <net.arvin.selector.uis.views.photoview.PhotoView
+            android:id="@+id/ps_img_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
-</LinearLayout>
+        <net.arvin.selector.uis.views.GraffitiView
+            android:id="@+id/ps_graffiti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <net.arvin.selector.uis.views.FlexibleTextView
+            android:id="@+id/ps_tv_flexible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/ps_tv_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/ps_spacing_default"
+        android:text="@string/ps_cancel"
+        android:textColor="@color/ps_white_normal"
+        android:textSize="@dimen/ps_txt_big_content"
+        />
+
+    <TextView
+        android:id="@+id/ps_tv_ensure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="@dimen/ps_spacing_default"
+        android:text="@string/ps_ensure"
+        android:textColor="@color/ps_colorAccent"
+        android:textSize="@dimen/ps_txt_big_content"
+        />
+
+    <RelativeLayout
+        android:id="@+id/ps_layout_operate_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ps_spacing_forty"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/ps_img_pencil"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/ps_selector_pencil"
+            />
+
+        <ImageView
+            android:id="@+id/ps_img_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/ps_selector_text"
+            />
+
+        <ImageView
+            android:id="@+id/ps_img_resize"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:src="@drawable/ps_selector_resize"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ps_layout_pencil_tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ps_layout_operate_bar"
+        android:visibility="gone">
+
+        <net.arvin.selector.uis.views.ColorBarLayout
+            android:id="@+id/ps_layout_color_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="@dimen/ps_spacing_small"
+            android:paddingLeft="@dimen/ps_spacing_twenty_four"
+            android:paddingTop="@dimen/ps_spacing_small"/>
+
+        <ImageView
+            android:id="@+id/ps_img_undo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ps_layout_color_bar"
+            android:paddingBottom="@dimen/ps_spacing_four"
+            android:paddingTop="@dimen/ps_spacing_four"
+            android:src="@drawable/ps_ic_undo"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ps_spacing_divider"
+            android:layout_below="@id/ps_layout_color_bar"
+            android:background="@color/ps_white_divider"
+            />
+    </RelativeLayout>
+
+    <include layout="@layout/ps_layout_edit_text"/>
+
+</RelativeLayout>

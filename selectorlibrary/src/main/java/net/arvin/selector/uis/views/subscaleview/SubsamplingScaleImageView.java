@@ -199,7 +199,7 @@ public class SubsamplingScaleImageView extends View {
     private int orientation = ORIENTATION_0;
 
     // Max scale allowed (prevent infinite zoom)
-    private float maxScale = 2F;
+    private float maxScale = 4F;
 
     // Min scale allowed (prevent infinite zoom)
     private float minScale = minScale();

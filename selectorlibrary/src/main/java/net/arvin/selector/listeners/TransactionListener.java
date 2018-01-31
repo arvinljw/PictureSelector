@@ -20,4 +20,8 @@ public interface TransactionListener {
      */
     @SuppressWarnings("JavadocReference")
     void switchFragment(int fragmentPos, Bundle bundle);
+
+    void showFragment(int fragmentPos, Bundle bundle);
+
+    void hideFragment(int hidePos, int currPos);
 }

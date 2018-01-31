@@ -4,8 +4,8 @@ ext {
             minSdkVersion    : 14,
             targetSdkVersion : 26,
             compileSdkVersion: 26,
-            versionCode      : 8,
-            versionName      : "2.0.1",
+            versionCode      : 9,
+            versionName      : "2.0.3",
     ]
 
     def googleSupportVersion = "26.1.0"

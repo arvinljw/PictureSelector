@@ -24,7 +24,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.selector.fileprovider"
+            android:authorities="${applicationId}.selector.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -35,7 +35,8 @@
         <activity
             android:name="net.arvin.selector.uis.SelectorActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/TransparentTheme"/>
+            android:theme="@style/TransparentTheme"
+            android:windowSoftInputMode="adjustPan"/>
     </application>
 
 </manifest>

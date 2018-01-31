@@ -1,5 +1,6 @@
 package net.arvin.selector.uis.views.photoview;
 
+import android.graphics.Matrix;
 import android.graphics.RectF;
 
 /**
@@ -14,5 +15,5 @@ public interface OnMatrixChangedListener {
      *
      * @param rect - Rectangle displaying the Drawable's new bounds.
      */
-    void onMatrixChanged(RectF rect);
+    void onMatrixChanged(RectF rect, Matrix matrix);
 }

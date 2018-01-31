@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:gravity="center"
+              android:orientation="horizontal">
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_white"
+        style="@style/ps_circle_view"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_black"
+        style="@style/ps_circle_view"
+        app:ps_color="@color/ps_black_87"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_red"
+        style="@style/ps_circle_view"
+        app:ps_color="@color/ps_paint_red"
+        app:ps_radius="@dimen/ps_spacing_twelve"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_yellow"
+        style="@style/ps_circle_view"
+        app:ps_color="@color/ps_paint_yellow"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_green"
+        style="@style/ps_circle_view"
+        app:ps_color="@color/ps_paint_green"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_blue"
+        style="@style/ps_circle_view"
+        app:ps_color="@color/ps_paint_blue"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_purple"
+        style="@style/ps_circle_view"
+        app:ps_color="@color/ps_paint_purple"
+        />
+
+    <net.arvin.selector.uis.views.CircleView
+        android:id="@+id/ps_circle_pink"
+        style="@style/ps_circle_view"
+        android:layout_marginRight="0dp"
+        app:ps_color="@color/ps_paint_pink"
+        />
+
+</LinearLayout>

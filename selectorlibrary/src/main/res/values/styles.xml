@@ -19,4 +19,10 @@
     <style name="normal_dialog.white">
         <item name="android:windowBackground">@color/ps_white_normal</item>
     </style>
+
+    <style name="ps_circle_view">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/ps_spacing_fourteen</item>
+    </style>
 </resources>

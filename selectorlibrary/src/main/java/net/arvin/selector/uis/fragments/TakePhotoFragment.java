@@ -55,8 +55,8 @@ public class TakePhotoFragment extends BaseFragment {
 
     @Override
     protected void init() {
-        choosePhotoFromCamera();
         initBaseInfo(getArguments());
+        choosePhotoFromCamera();
     }
 
     private void choosePhotoFromCamera() {
@@ -85,7 +85,7 @@ public class TakePhotoFragment extends BaseFragment {
      * 在manifest的application标签中加入配置
      * <provider
      * android:name="android.support.v4.content.FileProvider"
-     * android:authorities="换成包名.selector.fileprovider"
+     * android:authorities="换成包名.selector.provider"
      * android:exported="false"
      * android:grantUriPermissions="true">
      * <meta-data

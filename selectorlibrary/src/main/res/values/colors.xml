@@ -2,9 +2,16 @@
 <resources>
     <color name="ps_colorPrimary">#393a3e</color>
     <color name="ps_colorPrimaryDark">#2f3034</color>
-    <color name="ps_colorAccent">#1cab1d</color>
-    <color name="ps_colorAccentHalf">#881cab1d</color>
+    <color name="ps_colorAccent">#1aad19</color>
+    <color name="ps_colorAccentHalf">#881aad19</color>
     <color name="ps_colorAccentEnable">#2a5f2f</color>
+
+    <color name="ps_paint_red">#f3341b</color>
+    <color name="ps_paint_yellow">#febc47</color>
+    <color name="ps_paint_green">#1aad19</color>
+    <color name="ps_paint_blue">#178feb</color>
+    <color name="ps_paint_purple">#925aeb</color>
+    <color name="ps_paint_pink">#e826bd</color>
 
     <!--color : white-->
     <color name="ps_white_divider">#1FFFFFFF</color><!--12% 分隔线-->

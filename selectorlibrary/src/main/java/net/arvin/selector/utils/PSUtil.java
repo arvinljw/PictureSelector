@@ -3,10 +3,12 @@ package net.arvin.selector.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
 
 import net.arvin.selector.data.ConstantData;
 import net.arvin.selector.entities.FileEntity;

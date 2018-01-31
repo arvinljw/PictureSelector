@@ -15,7 +15,7 @@
  *******************************************************************************/
 package net.arvin.selector.uis.views.photoview;
 
-interface OnGestureListener {
+public interface OnGestureListener {
 
     void onDrag(float dx, float dy);
 

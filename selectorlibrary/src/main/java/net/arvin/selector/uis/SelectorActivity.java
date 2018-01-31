@@ -32,6 +32,7 @@ public class SelectorActivity extends AppCompatActivity implements TransactionLi
 
     private SparseArray<Class> mFragmentClasses;
     private SparseArray<BaseFragment> mFragments;
+    private int mCurrPos = -1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,8 +88,15 @@ public class SelectorActivity extends AppCompatActivity implements TransactionLi
 
     @Override
     public void switchFragment(int fragmentPos, Bundle bundle) {
+        hideFragment(mCurrPos, fragmentPos);
+        showFragment(fragmentPos, bundle);
+    }
+
+    @Override
+    public void showFragment(int fragmentPos, Bundle bundle) {
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        hideAll(transaction);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        mCurrPos = fragmentPos;
 
         BaseFragment toFragment = mFragments.get(fragmentPos);
         if (toFragment == null) {
@@ -110,13 +118,18 @@ public class SelectorActivity extends AppCompatActivity implements TransactionLi
         transaction.commitAllowingStateLoss();
     }
 
-    private void hideAll(FragmentTransaction transaction) {
-        for (int i = 0, size = mFragments.size(); i < size; i++) {
-            BaseFragment fragment = mFragments.get(mFragments.keyAt(i));
-            if (fragment != null && !(fragment instanceof SelectorFragment)) {
+    @Override
+    public void hideFragment(int hidePos, int currPos) {
+        if (mCurrPos != -1 && mCurrPos != ConstantData.VALUE_CHANGE_FRAGMENT_SELECTOR) {
+            FragmentTransaction transaction = mFragmentManager.beginTransaction();
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+            BaseFragment fragment = mFragments.get(mCurrPos);
+            if (fragment != null) {
                 transaction.hide(fragment);
             }
+            transaction.commitAllowingStateLoss();
         }
+        mCurrPos = currPos;
     }
 
     @Override

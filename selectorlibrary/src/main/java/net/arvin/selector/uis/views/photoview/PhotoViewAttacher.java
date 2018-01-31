@@ -32,6 +32,9 @@ import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 import android.widget.OverScroller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * The component of {@link PhotoView} which does the work allowing for zooming, scaling, panning, etc.
  * It is made public in case you need to subclass something other than {@link ImageView} and still
@@ -40,7 +43,7 @@ import android.widget.OverScroller;
 public class PhotoViewAttacher implements View.OnTouchListener,
         View.OnLayoutChangeListener {
 
-    private static float DEFAULT_MAX_SCALE = 3.0f;
+    private static float DEFAULT_MAX_SCALE = 4.0f;
     private static float DEFAULT_MID_SCALE = 1.75f;
     private static float DEFAULT_MIN_SCALE = 1.0f;
     private static int DEFAULT_ZOOM_DURATION = 200;
@@ -74,7 +77,7 @@ public class PhotoViewAttacher implements View.OnTouchListener,
     private final float[] mMatrixValues = new float[9];
 
     // Listeners
-    private OnMatrixChangedListener mMatrixChangeListener;
+    private List<OnMatrixChangedListener> mMatrixChangeListeners = new ArrayList<>();
     private OnPhotoTapListener mPhotoTapListener;
     private OnOutsidePhotoTapListener mOutsidePhotoTapListener;
     private OnViewTapListener mViewTapListener;
@@ -441,7 +444,11 @@ public class PhotoViewAttacher implements View.OnTouchListener,
     }
 
     public void setOnMatrixChangeListener(OnMatrixChangedListener listener) {
-        mMatrixChangeListener = listener;
+        mMatrixChangeListeners.add(listener);
+    }
+
+    public void removeMatrixChangeListener(OnMatrixChangedListener listener){
+        mMatrixChangeListeners.remove(listener);
     }
 
     public void setOnPhotoTapListener(OnPhotoTapListener listener) {
@@ -548,6 +555,10 @@ public class PhotoViewAttacher implements View.OnTouchListener,
         return mDrawMatrix;
     }
 
+    public Matrix getSuppMatrix() {
+        return mSuppMatrix;
+    }
+
     public void setZoomTransitionDuration(int milliseconds) {
         this.mZoomDuration = milliseconds;
     }
@@ -578,10 +589,12 @@ public class PhotoViewAttacher implements View.OnTouchListener,
         mImageView.setImageMatrix(matrix);
 
         // Call MatrixChangedListener if needed
-        if (mMatrixChangeListener != null) {
+        if (mMatrixChangeListeners != null) {
             RectF displayRect = getDisplayRect(matrix);
             if (displayRect != null) {
-                mMatrixChangeListener.onMatrixChanged(displayRect);
+                for (OnMatrixChangedListener listener : mMatrixChangeListeners) {
+                    listener.onMatrixChanged(displayRect, mSuppMatrix);
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package net.arvin.selectordemo;
 
 import android.Manifest;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.RadioGroup;
 
 import net.arvin.selector.SelectorHelper;
 import net.arvin.selector.data.ConstantData;
+import net.arvin.selector.uis.views.GraffitiView;
 import net.arvin.selector.uis.views.photoview.PhotoView;
 import net.arvin.selector.utils.PSGlideUtil;
 
@@ -32,6 +34,10 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         mImage = findViewById(R.id.image);
+
+        GraffitiView layoutGraffiti = findViewById(R.id.layout_graffiti);
+        layoutGraffiti.setCanDraw(true);
+        layoutGraffiti.setColor(getResources().getColor(R.color.ps_colorAccent));
 
         PSGlideUtil.loadImage(this, R.drawable.ps_icon, mImage);
 

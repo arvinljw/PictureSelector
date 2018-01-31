@@ -54,7 +54,8 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
             @Override
             public void onClick(View v) {
                 if (mTransactionListener != null) {
-                    mTransactionListener.switchFragment(ConstantData.VALUE_CHANGE_FRAGMENT_EDIT, getArguments());
+                    mTransactionListener.showFragment(ConstantData.VALUE_CHANGE_FRAGMENT_EDIT,
+                            ConstantData.toEditBundle(getArguments(), mItems.get(mCurrPosition)));
                 }
             }
         };

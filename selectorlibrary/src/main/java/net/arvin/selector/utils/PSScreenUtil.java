@@ -37,5 +37,4 @@ public class PSScreenUtil {
         final float fontScale = Resources.getSystem().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
-
 }

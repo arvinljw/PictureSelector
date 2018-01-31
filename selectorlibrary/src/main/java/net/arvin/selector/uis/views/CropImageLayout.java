@@ -136,8 +136,4 @@ public class CropImageLayout extends FrameLayout {
             mImgReviewBig.setPadding(0, 0, 0, 0);
         }
     }
-
-    public void recycle() {
-        mImgReviewBig.recycle();
-    }
 }
