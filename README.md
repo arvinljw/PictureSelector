@@ -39,7 +39,7 @@ allprojects {
 ```
 dependencies {
     ...
-    compile 'com.github.arvinljw:PictureSelector:v2.0.2'
+    compile 'com.github.arvinljw:PictureSelector:v2.0.3'
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 ```
 dependencies {
     ...
-    compile ('com.github.arvinljw:PictureSelector:v2.0.2'){
+    compile ('com.github.arvinljw:PictureSelector:v2.0.3'){
         exclude group: 'com.android.support'
     }
 }
@@ -79,7 +79,7 @@ dependencies {
 ```
 <provider
     android:name="android.support.v4.content.FileProvider"
-    android:authorities="${applicationId}.selector.fileprovider"
+    android:authorities="${applicationId}.selector.provider"
     android:exported="false"
     android:grantUriPermissions="true">
     <meta-data
