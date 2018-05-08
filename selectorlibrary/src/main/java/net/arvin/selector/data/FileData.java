@@ -1,5 +1,6 @@
 package net.arvin.selector.data;
 
+import android.app.Activity;
 import android.content.Context;
 import android.database.Cursor;
 import android.provider.MediaStore;
@@ -20,11 +21,11 @@ import java.util.Map;
  */
 public class FileData {
 
-    public static void getImageFolderData(final Context context, final DataCallback callback) {
+    public static void getImageFolderData(final Activity context, final DataCallback callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                ArrayList<FolderEntity> folders = new ArrayList<>();
+                final ArrayList<FolderEntity> folders = new ArrayList<>();
 
                 //图集列表
                 LinkedHashMap<String, ArrayList<FileEntity>> foldersMap = new LinkedHashMap<>();
@@ -65,8 +66,12 @@ public class FileData {
                         folders.add(new FolderEntity(entry.getKey(), files.size(), files.get(0).getPath(), files));
                     }
                 }
-
-                callback.dataCallback(folders);
+                context.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.dataCallback(folders);
+                    }
+                });
             }
         }).start();
     }
