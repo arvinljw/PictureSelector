@@ -39,7 +39,7 @@ allprojects {
 ```
 dependencies {
     ...
-    compile 'com.github.arvinljw:PictureSelector:v2.0.4'
+    compile 'com.github.arvinljw:PictureSelector:v2.0.5'
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 ```
 dependencies {
     ...
-    compile ('com.github.arvinljw:PictureSelector:v2.0.4'){
+    compile ('com.github.arvinljw:PictureSelector:v2.0.5'){
         exclude group: 'com.android.support'
     }
 }

@@ -12,6 +12,7 @@ ext {
 
     dependencies = [
             support_v7   : "com.android.support:appcompat-v7:${googleSupportVersion}",
+            support_v4   : "com.android.support:support-v4:${googleSupportVersion}",
             recyclerview : "com.android.support:recyclerview-v7:${googleSupportVersion}",
             glide        : "com.github.bumptech.glide:glide:4.4.0",
             glidecompiler: "com.github.bumptech.glide:compiler:4.4.0",

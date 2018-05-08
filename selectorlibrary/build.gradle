@@ -37,6 +37,7 @@ android {
 dependencies {
     def dependencies = rootProject.ext.dependencies
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile dependencies.support_v4
     compile dependencies.support_v7
     compile dependencies.recyclerview
 
