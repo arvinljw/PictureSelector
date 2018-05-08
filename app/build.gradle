@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     def version = rootProject.ext.version
     compileSdkVersion version.compileSdkVersion as int
-    buildToolsVersion android.buildToolsVersion as String
 
     defaultConfig {
         applicationId "net.arvin.selectordemo"
@@ -22,7 +21,7 @@ android {
 
 dependencies {
     def dependencies = rootProject.ext.dependencies
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':selectorlibrary')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':selectorlibrary')
 //    compile 'com.github.arvinljw:PictureSelector:v2.0.2'
 }

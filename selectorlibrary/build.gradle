@@ -6,7 +6,6 @@ group='com.github.arvinljw'
 android {
     def version = rootProject.ext.version
     compileSdkVersion version.compileSdkVersion as int
-    buildToolsVersion version.buildToolsVersion as String
 
     defaultConfig {
         minSdkVersion version.minSdkVersion as int
@@ -36,15 +35,15 @@ android {
 
 dependencies {
     def dependencies = rootProject.ext.dependencies
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile dependencies.support_v4
-    compile dependencies.support_v7
-    compile dependencies.recyclerview
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api dependencies.support_v4
+    api dependencies.support_v7
+    api dependencies.recyclerview
 
-    compile (dependencies.glide){
+    api (dependencies.glide){
         exclude group: 'com.android.support'
     }
     annotationProcessor dependencies.glidecompiler
-    compile (dependencies.annotations)
-    compile (dependencies.exifinterface)
+    api dependencies.annotations
+    api dependencies.exifinterface
 }
