@@ -23,5 +23,6 @@ dependencies {
     def dependencies = rootProject.ext.dependencies
     api fileTree(include: ['*.jar'], dir: 'libs')
     api project(':selectorlibrary')
+    api dependencies.glide
 //    api 'com.github.arvinljw:PictureSelector:v2.0.6'
 }

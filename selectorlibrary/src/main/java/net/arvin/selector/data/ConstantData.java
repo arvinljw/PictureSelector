@@ -6,6 +6,7 @@ import net.arvin.selector.entities.FileEntity;
 import net.arvin.selector.entities.FolderEntity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by arvinljw on 17/12/25 09:44
@@ -105,6 +106,13 @@ public class ConstantData {
 
     public static ArrayList<String> getSelectedItems() {
         return sSelectedItems;
+    }
+
+    public static void setSelectedItems(List<String> items) {
+        if (items != null) {
+            sSelectedItems.clear();
+            sSelectedItems.addAll(items);
+        }
     }
 
     public static void addSelectedItem(FileEntity item) {

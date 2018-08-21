@@ -56,8 +56,11 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
         mTvFolderName.setOnClickListener(getChangeFolderListener());
         mTvReview.setOnClickListener(getReviewListener());
 
-        initSelectorInfo(getArguments());
-
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            initSelectorInfo(bundle);
+            ConstantData.setSelectedItems(bundle.getStringArrayList(ConstantData.KEY_SELECTED_PICTURES));
+        }
         loadData();
     }
 
@@ -68,10 +71,6 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
                 mData = data;
                 if (mData.size() > 0) {
                     ConstantData.setFolders(mData);
-                    ArrayList<String> selectedItems = ConstantData.getSelectedItems();
-                    if (selectedItems != null) {
-                        selectedItems.clear();
-                    }
 
                     mItems.clear();
                     FolderEntity folderEntity = mData.get(0);
@@ -79,6 +78,11 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
                     mItems.addAll(folderEntity.getImages());
                     mAdapter.notifyDataSetChanged();
                     mTvFolderName.setText(folderEntity.getFolderName());
+
+                    int selectedCount = ConstantData.getSelectedItems().size();
+                    setEnsure(selectedCount);
+                    setReviewCount(selectedCount);
+                    mAdapter.setSelectedCount(selectedCount);
                 }
             }
         });

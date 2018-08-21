@@ -1,6 +1,7 @@
 package net.arvin.selector.uis.adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,8 +55,9 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         return (mWithCamera && position == 0) ? TYPE_CAMERA : TYPE_ITEM;
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_CAMERA) {
             return new CameraViewHolder(LayoutInflater.from(mContext).inflate(R.layout.ps_item_take_photo, parent, false));
         }
@@ -63,7 +65,7 @@ public class SelectorAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_CAMERA) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -39,12 +39,12 @@ public class FolderDialog extends Dialog implements OnItemClickListener {
     @SuppressWarnings("ConstantConditions")
     private void layoutDialog(Context context) {
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        getWindow().setGravity(Gravity.START | Gravity.TOP);
+        getWindow().setGravity(Gravity.BOTTOM);
         WindowManager.LayoutParams lp = getWindow().getAttributes();
         lp.x = 0;
-        lp.y = PSScreenUtil.dp2px(96);
+        lp.y = PSScreenUtil.dp2px(48);
         lp.width = metrics.widthPixels;
-        //这个高度包括了状态栏,所以还要多减去24dp
+        //这个高度去掉了底部，2*标题以及状态栏
         lp.height = metrics.heightPixels - PSScreenUtil.dp2px(168);
         getWindow().setAttributes(lp);
     }

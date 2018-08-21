@@ -41,10 +41,17 @@ public class FileData {
                         long time = cursor.getLong(cursor.getColumnIndex(MediaStore.Images.Media.DATE_ADDED));
                         FileEntity entity = new FileEntity(path, time, size);
 
-                        if (entity.getSize() / 1024 < 1) {
+                        if (entity.getSize() / 1024 < 10) {
                             continue;
                         }
 
+                        ArrayList<String> selectedItems = ConstantData.getSelectedItems();
+                        for (String item : selectedItems) {
+                            if (item.equals(path)) {
+                                entity.setSelected(true);
+                            }
+                        }
+                        
                         foldersMap.get(allKey).add(entity);
 
                         //将当前图片加入到相应的文件图集中

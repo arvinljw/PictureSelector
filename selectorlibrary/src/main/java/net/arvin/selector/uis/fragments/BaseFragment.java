@@ -112,7 +112,7 @@ public abstract class BaseFragment extends Fragment {
         mMaxCount = bundle.getInt(ConstantData.KEY_MAX_COUNT, ConstantData.VALUE_COUNT_SINGLE);
         mCanCrop = bundle.getBoolean(ConstantData.KEY_CAN_CROP, ConstantData.VALUE_CAN_CROP_FALSE);
         mWithCamera = bundle.getBoolean(ConstantData.KEY_WITH_CAMERA, ConstantData.VALUE_WITH_CAMERA_TRUE);
-        mAuthorities = getArguments().getString(ConstantData.KEY_AUTHORITIES);
+        mAuthorities = bundle.getString(ConstantData.KEY_AUTHORITIES);
     }
 
     protected void setTitle(int currPos, int totalCount) {
