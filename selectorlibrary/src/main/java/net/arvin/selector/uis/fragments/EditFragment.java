@@ -47,7 +47,7 @@ public class EditFragment extends BaseFragment implements View.OnClickListener, 
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         initView();
 
         update(getArguments());

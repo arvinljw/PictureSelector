@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.arvin.selector.data.ConstantData;
 import net.arvin.selector.R;
+import net.arvin.selector.data.ConstantData;
 import net.arvin.selector.listeners.TransactionListener;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public abstract class BaseFragment extends Fragment {
     protected TextView mTvTitle;
     protected TextView mTvEnsure;
 
-
+    protected Bundle baseInfo;
     protected int mSelectType;
     protected boolean mSingleSelection;
     protected int mMaxCount;
@@ -62,7 +62,7 @@ public abstract class BaseFragment extends Fragment {
             mRoot = inflater.inflate(getLayout(), null);
         }
         initHeader();
-        init();
+        init(savedInstanceState);
         return mRoot;
     }
 
@@ -86,7 +86,7 @@ public abstract class BaseFragment extends Fragment {
                 }
             });
         } catch (Exception e) {
-            Log.d("HeaderLayout","Do not have Header.");
+            Log.d("HeaderLayout", "Do not have Header.");
         }
     }
 
@@ -106,6 +106,7 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void initBaseInfo(Bundle bundle) {
+        this.baseInfo = bundle;
         mSelectType = bundle.getInt(ConstantData.KEY_TYPE_SELECT, ConstantData.VALUE_TYPE_PICTURE);
         mSingleSelection = bundle.getBoolean(ConstantData.KEY_SINGLE_SELECTION, ConstantData.VALUE_SINGLE_SELECTION_TRUE);
         mMaxCount = bundle.getInt(ConstantData.KEY_MAX_COUNT, ConstantData.VALUE_COUNT_SINGLE);
@@ -155,7 +156,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract int getLayout();
 
-    protected abstract void init();
+    protected abstract void init(Bundle savedInstanceState);
 
     protected abstract ArrayList<String> getSelectedPictures();
 

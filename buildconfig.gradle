@@ -1,13 +1,13 @@
 ext {
     version = [
             minSdkVersion    : 14,
-            targetSdkVersion : 26,
-            compileSdkVersion: 26,
+            targetSdkVersion : 27,
+            compileSdkVersion: 27,
             versionCode      : 9,
-            versionName      : "2.0.3",
+            versionName      : "2.0.6",
     ]
 
-    def googleSupportVersion = "26.1.0"
+    def googleSupportVersion = "27.1.1"
 
     dependencies = [
             support_v7   : "com.android.support:appcompat-v7:${googleSupportVersion}",

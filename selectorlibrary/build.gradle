@@ -40,10 +40,7 @@ dependencies {
     api dependencies.support_v7
     api dependencies.recyclerview
 
-    api (dependencies.glide){
-        exclude group: 'com.android.support'
-    }
-    annotationProcessor dependencies.glidecompiler
+    compileOnly (dependencies.glide)
     api dependencies.annotations
     api dependencies.exifinterface
 }

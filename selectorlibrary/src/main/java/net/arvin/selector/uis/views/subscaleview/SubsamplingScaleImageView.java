@@ -14,7 +14,6 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.support.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -22,6 +21,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.annotation.AnyThread;
 import android.support.annotation.NonNull;
+import android.support.media.ExifInterface;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -31,8 +31,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewParent;
 
-import net.arvin.selector.uis.views.subscaleview.*;
-import net.arvin.selector.uis.views.subscaleview.ImageViewState;
 import net.arvin.selector.R.styleable;
 import net.arvin.selector.uis.views.subscaleview.decoder.CompatDecoderFactory;
 import net.arvin.selector.uis.views.subscaleview.decoder.DecoderFactory;
@@ -1933,9 +1931,9 @@ public class SubsamplingScaleImageView extends View {
                     cursor.close();
                 }
             }
-        } else if (sourceUri.startsWith(net.arvin.selector.uis.views.subscaleview.ImageSource.FILE_SCHEME) && !sourceUri.startsWith(net.arvin.selector.uis.views.subscaleview.ImageSource.ASSET_SCHEME)) {
+        } else if (sourceUri.startsWith(ImageSource.FILE_SCHEME) && !sourceUri.startsWith(net.arvin.selector.uis.views.subscaleview.ImageSource.ASSET_SCHEME)) {
             try {
-                ExifInterface exifInterface = new ExifInterface(sourceUri.substring(net.arvin.selector.uis.views.subscaleview.ImageSource.FILE_SCHEME.length() - 1));
+                ExifInterface exifInterface = new ExifInterface(String.valueOf(ImageSource.FILE_SCHEME.length() - 1));
                 int orientationAttr = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
                 if (orientationAttr == ExifInterface.ORIENTATION_NORMAL || orientationAttr == ExifInterface.ORIENTATION_UNDEFINED) {
                     exifOrientation = ORIENTATION_0;

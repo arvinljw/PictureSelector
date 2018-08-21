@@ -50,11 +50,11 @@ public class TakePhotoFragment extends BaseFragment {
 
     @Override
     public void update(Bundle bundle) {
-        init();
+        init(null);
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         initBaseInfo(getArguments());
         choosePhotoFromCamera();
     }

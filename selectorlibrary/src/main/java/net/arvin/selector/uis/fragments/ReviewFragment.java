@@ -37,7 +37,7 @@ public class ReviewFragment extends BaseFragment implements ViewPager.OnPageChan
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         mViewPager = mRoot.findViewById(R.id.ps_view_pager);
         mTvEdit = mRoot.findViewById(R.id.ps_tv_edit);
         mLayoutSelector = mRoot.findViewById(R.id.ps_layout_selector);

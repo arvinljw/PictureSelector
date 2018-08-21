@@ -6,8 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import net.arvin.selector.data.ConstantData;
 import net.arvin.selector.R;
+import net.arvin.selector.data.ConstantData;
 import net.arvin.selector.data.FileData;
 import net.arvin.selector.entities.FileEntity;
 import net.arvin.selector.entities.FolderEntity;
@@ -19,7 +19,6 @@ import net.arvin.selector.uis.views.FolderDialog;
 import net.arvin.selector.utils.PSUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by arvinljw on 17/12/25 14:17
@@ -42,7 +41,7 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         mItems = new ArrayList<>();
         RecyclerView recyclerView = mRoot.findViewById(R.id.ps_recycler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), ConstantData.VALUE_SPAN_COUNT));
@@ -212,4 +211,5 @@ public class SelectorFragment extends BaseFragment implements OnItemClickListene
             mTvFolderName.setText(folderEntity.getFolderName());
         }
     }
+
 }
