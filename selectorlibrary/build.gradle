@@ -36,11 +36,10 @@ android {
 dependencies {
     def dependencies = rootProject.ext.dependencies
     api fileTree(include: ['*.jar'], dir: 'libs')
-    api dependencies.support_v4
     api dependencies.support_v7
     api dependencies.recyclerview
 
-    compileOnly (dependencies.glide)
+    compileOnly dependencies.glide
     api dependencies.annotations
     api dependencies.exifinterface
 }

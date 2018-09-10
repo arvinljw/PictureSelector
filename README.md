@@ -39,7 +39,8 @@ allprojects {
 ```
 dependencies {
     ...
-    compile 'com.github.arvinljw:PictureSelector:v2.0.6'
+    api 'com.github.bumptech.glide:glide:4.4.0'
+    api 'com.github.arvinljw:PictureSelector:v2.0.8'
 }
 ```
 
@@ -51,16 +52,21 @@ dependencies {
 * exifinterface
 * glide
 
-前四个都是com.android.support下边的，版本是**26.1.0**，glide使用版本**4.4.0**
+前四个都是com.android.support下边的，版本是**27.1.1**，glide使用版本**4.4.0**
 
 若是引用的包重复可使用类似这样使用
 
 ```
 dependencies {
     ...
-    compile ('com.github.arvinljw:PictureSelector:v2.0.6'){
+    api 'com.github.bumptech.glide:glide:4.4.0'
+    api ('com.github.arvinljw:PictureSelector:v2.0.8'){
         exclude group: 'com.android.support'
     }
+    api v7
+    api recyclerview
+    api annotations
+    api exifinterface
 }
 ```
 
