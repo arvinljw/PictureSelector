@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.arvinljw'
+group = 'com.github.arvinljw'
 
 android {
-    def version = rootProject.ext.version
-    compileSdkVersion version.compileSdkVersion as int
+    compileSdkVersion 29
 
     defaultConfig {
-        minSdkVersion version.minSdkVersion as int
-        targetSdkVersion version.targetSdkVersion as int
+        minSdkVersion 16
+        targetSdkVersion 29
     }
     // build a jar with source files
     task sourcesJar(type: Jar) {
@@ -17,12 +16,12 @@ android {
         classifier = 'sources'
     }
     task javadoc(type: Javadoc) {
-        failOnError  false
+        failOnError false
         source = android.sourceSets.main.java.sourceFiles
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
         classpath += configurations.compile
     }
-// build a jar with javadoc
+    // build a jar with javadoc
     task javadocJar(type: Jar, dependsOn: javadoc) {
         classifier = 'javadoc'
         from javadoc.destinationDir
@@ -34,12 +33,8 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.dependencies
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api dependencies.support_v7
-    api dependencies.recyclerview
-
-    compileOnly dependencies.glide
-    api dependencies.annotations
-    api dependencies.exifinterface
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    compileOnly 'androidx.appcompat:appcompat:1.1.0'
+    compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
+    compileOnly 'com.github.chrisbanes:PhotoView:2.3.0'
 }

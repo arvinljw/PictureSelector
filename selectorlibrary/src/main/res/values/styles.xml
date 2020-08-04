@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TransparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/ps_colorPrimary</item>
-        <item name="colorPrimaryDark">@color/ps_colorPrimaryDark</item>
-        <item name="colorAccent">@color/ps_colorAccent</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">false</item>
-    </style>
-
-    <style name="normal_dialog" parent="Base.Theme.AppCompat.Light.Dialog">
-        <item name="android:windowFrame">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>
-
-    <style name="normal_dialog.white">
-        <item name="android:windowBackground">@color/ps_white_normal</item>
-    </style>
-
-    <style name="ps_circle_view">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginRight">@dimen/ps_spacing_fourteen</item>
+    <style name="PS.Default" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/ps_primary</item>
+        <item name="colorPrimaryDark">@color/ps_primary_dark</item>
+        <item name="titleColor">@color/ps_title_color</item>
+        <item name="titleBg">@drawable/ps_bg_title</item>
+        <item name="sendTextColorEnable">@color/ps_send_text_enable</item>
+        <item name="sendTextColorDisable">@color/ps_send_text_disable</item>
+        <item name="sendBg">@drawable/ps_bg_send</item>
+        <item name="bottomBg">@color/ps_bottom_bg</item>
+        <item name="listBg">@color/ps_list_bg</item>
+        <item name="radioBg">@drawable/ps_item_select_bg</item>
+        <item name="itemSelectTextColor">@color/ps_item_select_text_color</item>
+        <item name="folderCountColor">@color/ps_folder_count_color</item>
+        <item name="folderDivider">@color/ps_folder_divider_color</item>
+        <item name="previewTitleColor">@color/ps_preview_title_color</item>
+        <item name="previewBottomBg">@color/ps_preview_bottom_bg</item>
+        <item name="bottomTextColor">@color/ps_bottom_text_color</item>
+        <item name="bottomDivider">@color/ps_bottom_divider</item>
     </style>
 </resources>

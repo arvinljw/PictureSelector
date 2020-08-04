@@ -3,8 +3,29 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/ps_colorPrimary</item>
-        <item name="colorPrimaryDark">@color/ps_colorPrimaryDark</item>
-        <item name="colorAccent">@color/ps_colorAccent</item>
+        <item name="colorPrimary">@color/ps_primary</item>
+        <item name="colorPrimaryDark">@color/ps_primary_dark</item>
+        <item name="colorAccent">@color/ps_send_bg_enable</item>
+    </style>
+
+    <style name="PS.Customer" parent="PS.Default">
+        <!--下边的所有属性都可以改变，几乎涵盖了该库的所有布局中用到的颜色-->
+        <!--        <item name="colorPrimary">@color/ps_primary</item>-->
+        <!--        <item name="colorPrimaryDark">@color/ps_primary_dark</item>-->
+        <!--        <item name="titleColor">@color/ps_title_color</item>-->
+        <!--        <item name="titleBg">@drawable/ps_bg_title</item>-->
+        <!--        <item name="sendTextColorEnable">@color/ps_send_text_enable</item>-->
+        <!--        <item name="sendTextColorDisable">@color/ps_send_text_disable</item>-->
+        <!--        <item name="sendBg">@drawable/ps_bg_send</item>-->
+        <!--        <item name="bottomBg">@color/ps_bottom_bg</item>-->
+        <!--        <item name="listBg">@color/ps_list_bg</item>-->
+        <!--        <item name="radioBg">@drawable/ps_item_select_bg</item>-->
+        <!--        <item name="itemSelectTextColor">@color/ps_item_select_text_color</item>-->
+        <!--        <item name="folderCountColor">@color/ps_folder_count_color</item>-->
+        <!--        <item name="folderDivider">@color/ps_folder_divider_color</item>-->
+        <!--        <item name="previewTitleColor">@color/ps_preview_title_color</item>-->
+        <!--        <item name="previewBottomBg">@color/ps_preview_bottom_bg</item>-->
+        <!--        <item name="bottomTextColor">@color/ps_bottom_text_color</item>-->
+        <!--        <item name="bottomDivider">@color/ps_bottom_divider</item>-->
     </style>
 </resources>

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <declare-styleable name="SubsamplingScaleImageView">
-        <attr name="src" format="reference"/>
-        <attr name="assetName" format="string"/>
-        <attr name="panEnabled" format="boolean"/>
-        <attr name="zoomEnabled" format="boolean"/>
-        <attr name="quickScaleEnabled" format="boolean"/>
-        <attr name="tileBackgroundColor" format="color"/>
-    </declare-styleable>
-
-    <declare-styleable name="CircleView">
-        <attr name="ps_color" format="color|reference"/>
-        <attr name="ps_radius" format="dimension"/>
-    </declare-styleable>
+    <attr name="titleColor" format="color|reference" />
+    <attr name="titleBg" format="reference" />
+    <attr name="sendTextColorEnable" format="color|reference" />
+    <attr name="sendTextColorDisable" format="color|reference" />
+    <attr name="sendBg" format="reference" />
+    <attr name="listBg" format="color|reference" />
+    <attr name="radioBg" format="reference" />
+    <attr name="itemSelectTextColor" format="color|reference" />
+    <attr name="folderCountColor" format="color|reference" />
+    <attr name="folderDivider" format="color|reference" />
+    <attr name="bottomBg" format="color|reference" />
+    <attr name="previewBottomBg" format="color|reference" />
+    <attr name="previewTitleColor" format="color|reference" />
+    <attr name="bottomDivider" format="color|reference" />
+    <attr name="bottomTextColor" format="color|reference" />
 </resources>

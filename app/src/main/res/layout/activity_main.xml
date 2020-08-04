@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,153 +7,32 @@
     android:padding="16dp"
     tools:context=".MainActivity">
 
-    <RadioGroup
-        android:id="@+id/rg_single"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="90dp"
-            android:text="是否单选"
-            android:textColor="@color/ps_black_normal"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_single_yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="是"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_single_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="否"
-            />
-
-        <EditText
-            android:id="@+id/ed_max_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:hint="最大数量"
-            android:inputType="number"
-            android:visibility="gone"
-            />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/rg_crop"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="90dp"
-            android:text="是否裁剪"
-            android:textColor="@color/ps_black_normal"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_crop_yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="是"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_crop_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:checked="true"
-            android:text="否"
-            />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/rg_camera"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="90dp"
-            android:text="是否带相机"
-            android:textColor="@color/ps_black_normal"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_camera_yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="是"
-            />
-
-        <RadioButton
-            android:id="@+id/rb_camera_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:text="否"
-            />
-    </RadioGroup>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/btnChoosePic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="selectPicture"
-            android:text="选图片"
-            />
+            android:text="选图片" />
 
         <Button
+            android:id="@+id/btnTakePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:onClick="takePhoto"
-            android:text="拍照"
-            />
+            android:text="拍照" />
 
     </LinearLayout>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#eeeeee">
-
-        <net.arvin.selector.uis.views.photoview.PhotoView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-        <net.arvin.selector.uis.views.GraffitiView
-            android:id="@+id/layout_graffiti"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </FrameLayout>
+    <ImageView
+        android:id="@+id/img_preview"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop" />
 
 </LinearLayout>

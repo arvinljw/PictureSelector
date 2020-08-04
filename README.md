@@ -1,206 +1,171 @@
 ## PictureSelector
 
-这是仿微信的图片选择器。
+我终于更新了，这是仿微信的图片选择器简化版，简化了编辑功能，就像知乎的图片选择器一样，提供的就是从手机的媒体库中选择文件功能。
 
-### 简介
+### 功能
 
-1、来源：相机，本地图片媒体库中jpg和png类型的图片
-
-2、功能：**多选、单选、拍照、预览、裁剪、大图、支持7.0**
-
-3、TODO：增加**多选时图片编辑功能，视频选择功能**
-
-### Demo下载
-
-![](screenshot/ps_icon.png)
-
-[PicSelector下载地址](app/PicSelector.apk)
-
-![](screenshot/use_sample.png)
+1、选择本地媒体库的图片和视频
+2、拍照
+3、媒体文件分页加载
+4、图片可选是否支持gif
+5、可自定义皮肤
+6、可自定义文案
+7、可自定义图片加载引擎
 
 ### 使用方式
 
 #### 引用
 
-**1、在根目录的build.gradle中加入如下配置**
+1、在根目录的build.gradle中加入如下配置
 
 ```
 allprojects {
     repositories {
-        ...
         maven { url 'https://jitpack.io' }
-        maven { url "https://dl.bintray.com/thelasterstar/maven/" }
     }
 }
 ```
 
-**2、在要是用的module中增加如下引用**
+2、在要是用的module中增加如下引用
 
 ```
 dependencies {
     ...
-    api 'com.github.bumptech.glide:glide:4.4.0'
-    api 'com.github.arvinljw:PictureSelector:v2.0.8'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'com.github.arvinljw:PictureSelector:3.0.0'
+    //例如demo中引入的是glide加载图片，所以引入glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
 }
 ```
 
-*注：该库引用的第三方代码*
-
-* v7
-* recyclerview
-* annotations
-* exifinterface
-* glide
-
-前四个都是com.android.support下边的，版本是**27.1.1**，glide使用版本**4.4.0**
-
-若是引用的包重复可使用类似这样使用
-
-```
-dependencies {
-    ...
-    api 'com.github.bumptech.glide:glide:4.4.0'
-    api ('com.github.arvinljw:PictureSelector:v2.0.8'){
-        exclude group: 'com.android.support'
-    }
-    api v7
-    api recyclerview
-    api annotations
-    api exifinterface
-}
-```
-
-**3、在AndroidManifest文件中添加权限以及必须配置**
-
-**权限**
-
-```
-<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-<uses-permission android:name="android.permission.CAMERA"/>
-```
-
-**配置**
+3、在AndroidManifest文件中配置FileProvider
 
 ```
 <provider
-    android:name="android.support.v4.content.FileProvider"
-    android:authorities="${applicationId}.selector.provider"
+    android:name="androidx.core.content.FileProvider"
+    android:authorities="${applicationId}.ps.provider"
     android:exported="false"
     android:grantUriPermissions="true">
     <meta-data
         android:name="android.support.FILE_PROVIDER_PATHS"
-        android:resource="@xml/ps_file_paths"/>
+        android:resource="@xml/ps_file_paths" />
 </provider>
-<activity
-    android:name="net.arvin.selector.uis.SelectorActivity"
-    android:screenOrientation="portrait"
-    android:theme="@style/TransparentTheme"/>
 ```
 
 #### 使用
 
-本库依然采用外观模式提供了一个[SelectorHelper](selectorlibrary/src/main/java/net/arvin/selector/SelectorHelper.java)，里边有一系列的静态方法去启动选择器，只是传递参数不同而已。
+首先需要申明，在调用拍照功能之前需要先申请拍照功能，在打开选择器之前需要申请文件读写权限。
 
-但是到最后都调用一个方法，所以只需要告诉大家这一个方法及其参数就能够比较好的使用了。
+对于权限申请库，没有好的可使用的话，可以使用我的[PermissionHelper](https://github.com/arvinljw/PermissionHelper)。
+
+**初始化**
+
+需要配置图片加载引擎：
 
 ```
-/**
- * 去选择图片或视频
- *
- * @param type             可选值{@link #VALUE_TYPE_PICTURE}{@link #VALUE_TYPE_VIDEO}{@link #VALUE_TYPE_PICTURE_VIDEO}{@link #VALUE_TYPE_CAMERA}
- * @param singleSelection  是否单选
- * @param canCrop          是否裁剪
- * @param maxCount         最大数量
- * @param withCamera       是否带相机
- * @param selectedPictures 已选中图片
- * @param selectedVideos   已选中视频
- */
-private static void select(Activity activity, int type, boolean singleSelection, boolean canCrop, int maxCount, boolean withCamera,
-                           ArrayList<String> selectedPictures, ArrayList<String> selectedVideos, int requestCode) {
-    Intent intent = new Intent(activity, SelectorActivity.class);
-    Bundle bundle = new Bundle();
-    bundle.putInt(KEY_TYPE_SELECT, type);
-    bundle.putBoolean(KEY_SINGLE_SELECTION, singleSelection);
-    bundle.putBoolean(KEY_CAN_CROP, canCrop);
-    bundle.putInt(KEY_MAX_COUNT, maxCount);
-    bundle.putBoolean(KEY_WITH_CAMERA, withCamera);
-    if (selectedPictures != VALUE_SELECTED_PICTURES_NULL) {
-        bundle.putStringArrayList(KEY_SELECTED_PICTURES, selectedPictures);
+public static void init(ImageEngine imageEngine)
+```
+
+以glide为例的实现方式如下：
+
+```
+imageEngine = new ImageEngine() {
+    @Override
+    public void loadImage(ImageView imageView, Uri uri) {
+        Glide.with(imageView)
+                .load(uri)
+                .into(imageView);
     }
-    if (selectedVideos != VALUE_SELECTED_VIDEOS_NULL) {
-        bundle.putStringArrayList(KEY_SELECTED_VIDEOS, selectedVideos);
-    }
-    bundle.putString(KEY_AUTHORITIES, PSUtil.getAuthorities(activity));
-    intent.putExtras(bundle);
-    activity.startActivityForResult(intent, requestCode);
-}
+};
 ```
 
-其实方法贴出来，也有注释就不用多说大家都明白了。**这里暂时还只支持选择图片。**
+自定义文案配置，可不配置则使用默认的，配置方法如下：
 
 ```
-/**
- * 拍照，是否裁剪
- */
-public static void takePhoto(Activity activity, boolean canCrop, int requestCode) {
-    select(activity, VALUE_TYPE_CAMERA, VALUE_SINGLE_SELECTION_TRUE, canCrop, VALUE_COUNT_SINGLE,
-            VALUE_WITH_CAMERA_TRUE, VALUE_SELECTED_PICTURES_NULL, VALUE_SELECTED_PICTURES_NULL, requestCode);
-}
-/**
- * 单选图片，不裁剪，带相机
- */
-public static void selectPicture(Activity activity, int requestCode) {
-    selectPicture(activity, VALUE_CAN_CROP_FALSE, VALUE_WITH_CAMERA_TRUE, requestCode);
-}
-/**
- * 单选图片
- *
- * @param canCrop    选择是否裁剪
- * @param withCamera 选择是否带相机
- */
-public static void selectPicture(Activity activity, boolean canCrop, boolean withCamera, int requestCode) {
-    select(activity, VALUE_TYPE_PICTURE, VALUE_SINGLE_SELECTION_TRUE, canCrop, VALUE_COUNT_SINGLE, withCamera,
-            VALUE_SELECTED_PICTURES_NULL, VALUE_SELECTED_VIDEOS_NULL, requestCode);
-}
-/**
- * 多选图片，带相机
- *
- * @param maxCount 多选的最大数量
- */
-public static void selectPictures(Activity activity, int maxCount, int requestCode) {
-    selectPictures(activity, maxCount, VALUE_WITH_CAMERA_TRUE, VALUE_SELECTED_PICTURES_NULL, requestCode);
-}
-/**
- * 多选图片
- *
- * @param maxCount         多选的最大数量
- * @param withCamera       选择是否带相机
- * @param selectedPictures 已选中的图片
- */
-public static void selectPictures(Activity activity, int maxCount, boolean withCamera, ArrayList<String> selectedPictures, int requestCode) {
-    select(activity, VALUE_TYPE_PICTURE, VALUE_SINGLE_SELECTION_FALSE, VALUE_CAN_CROP_FALSE, maxCount, withCamera,
-            selectedPictures, VALUE_SELECTED_VIDEOS_NULL, requestCode);
-}
+public static void init(ImageEngine imageEngine, TextEngine textEngine)
 ```
 
-也就是说这四个静态方法是可以使用的，多选时暂时不支持裁剪，之后会想微信一样增加编辑功能。
+也就是在初始化图片加载引擎的时候，同时传入文案引擎即可，不设置则使用DefaultTextEngine，如果需要适配多语言则需要自己定义文案引擎来实现。
 
-最后在onActivityResult中可以获得选中的图片，当然顺序是选择图片时的顺序。
+**打开本地媒体库**
+
+初始化完成之后，就可以打开本地媒体库了。
 
 ```
-ArrayList<String> backPics = data.getStringArrayListExtra(ConstantData.KEY_BACK_PICTURES);
+new SelectorHelper.Builder()
+        .setChooseSize(9)//设置选择的数量，最小为1
+        .setMediaType(MediaType.IMAGE)//设置选择的媒体类型
+        .setStyle(R.style.PS_Customer)//设置自定义皮肤，参考demo
+        .build()
+        .forResult(MainActivity.this, 1001);//打开本地媒体库
 ```
-这样就获取到选中的图片了，不管单选多选都这样，只是单选就只有一张。
 
-当然6.0以上的访问相机和本地文件的权限需要自己去实现，demo中也提供了一种方式，仅供参考。
+**打开相机**
 
-若是有什么问题，希望不吝赐教共同进步～
+```
+//TakePhotoUtil类中的下述方法
+public static Uri takePhoto(Activity activity, MediaStorageStrategy storageStrategy, int requestCode)
+```
+
+其中MediaStorageStrategy是拍照时传入的照片存储策略，是否放到在公共的区域。
+
+最后在onActivityResult接收打开本地媒体库和相机返回的数据：
+
+```
+SelectorHelper.getMediaDataFromIntent(data);//获取选择的本地媒体数据
+SelectorHelper.getMediaIsOriginalImage(data);//获取是否是原图标识，如果不是原图，可根据返回的数据自己按需处理
+
+//如果是放到自己应用下的私有文件，且不想公开让别的使用则直接返回takePhoto返回的uri即可
+//如果是放到公共区域，可公开让别的应用使用的则使用下述方法扫描放入媒体库中，并根据返回结果使用即可
+TakePhotoUtil.scanPath(this, TakePhotoUtil.getPhotoPath(), new MediaScanner.ScanCompletedCallback());
+//扫描拍照回来的路径得到在媒体库中的真实uri，同时也为了打开媒体库时能开到改图片
+```
+
+其中ScanCompletedCallback回调回来是在子线程，可转换到主线程在加载图片。
+
+
+**自定义皮肤**
+
+```
+<style name="PS.Customer" parent="PS.Default">
+    <!--下边的所有属性都可以改变，几乎涵盖了该库的所有布局中用到的颜色-->
+    <!--        <item name="colorPrimary">@color/ps_primary</item>-->
+    <!--        <item name="colorPrimaryDark">@color/ps_primary_dark</item>-->
+    <!--        <item name="titleColor">@color/ps_title_color</item>-->
+    <!--        <item name="titleBg">@drawable/ps_bg_title</item>-->
+    <!--        <item name="sendTextColorEnable">@color/ps_send_text_enable</item>-->
+    <!--        <item name="sendTextColorDisable">@color/ps_send_text_disable</item>-->
+    <!--        <item name="sendBg">@drawable/ps_bg_send</item>-->
+    <!--        <item name="bottomBg">@color/ps_bottom_bg</item>-->
+    <!--        <item name="listBg">@color/ps_list_bg</item>-->
+    <!--        <item name="radioBg">@drawable/ps_item_select_bg</item>-->
+    <!--        <item name="itemSelectTextColor">@color/ps_item_select_text_color</item>-->
+    <!--        <item name="folderCountColor">@color/ps_folder_count_color</item>-->
+    <!--        <item name="folderDivider">@color/ps_folder_divider_color</item>-->
+    <!--        <item name="previewTitleColor">@color/ps_preview_title_color</item>-->
+    <!--        <item name="previewBottomBg">@color/ps_preview_bottom_bg</item>-->
+    <!--        <item name="bottomTextColor">@color/ps_bottom_text_color</item>-->
+    <!--        <item name="bottomDivider">@color/ps_bottom_divider</item>-->
+</style>
+```
+
+对于color的属性值就是替换成自己的颜色，而对于drawable的则需要参考原来的drawable替换drawable中的颜色。
+对于上述属性，都是字面意思结合打开之后的ui对比，就能知道了，有点麻烦就暂时不挨着注释了。
+
+### 感谢
+
+这次的仿写微信是简略版本的，ui全是根据微信v7.0.17，自己切图实现。
+
+加载数据方面参考了知乎的[Matisse](https://github.com/zhihu/Matisse)以及另一位的[PictureSelector](https://github.com/LuckSiege/PictureSelector)。
+
+在此表示感谢。
 
 ### License
 
 ```
-   Copyright 2016 arvinljw
+   Copyright 2020 arvinljw
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

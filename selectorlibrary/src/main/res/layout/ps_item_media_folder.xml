@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?listBg">
+
+    <ImageView
+        android:id="@+id/ps_img_thumbnail"
+        android:layout_width="@dimen/dp_56"
+        android:layout_height="@dimen/dp_56"
+        android:layout_marginRight="@dimen/dp_12"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/ps_tv_folder_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/ps_img_thumbnail"
+        android:maxEms="15"
+        android:text="文件夹名字"
+        android:textColor="?titleColor"
+        android:textSize="@dimen/sp_14" />
+
+    <TextView
+        android:id="@+id/ps_tv_folder_item_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/ps_tv_folder_name"
+        android:text="（19）"
+        android:textColor="?folderCountColor"
+        android:textSize="@dimen/sp_16" />
+
+    <ImageView
+        android:id="@+id/ps_img_selected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_12"
+        android:src="@drawable/ps_ic_selected" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:layout_alignBottom="@id/ps_img_thumbnail"
+        android:layout_toRightOf="@id/ps_img_thumbnail"
+        android:background="?folderDivider" />
+
+</RelativeLayout>

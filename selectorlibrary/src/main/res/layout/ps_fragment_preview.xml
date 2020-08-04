@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ps_media_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never" />
+
+    <RelativeLayout
+        android:id="@+id/ps_layout_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="?colorPrimary"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ps_img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_8"
+            android:src="@drawable/ps_ic_back" />
+
+        <TextView
+            android:id="@+id/ps_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ps_img_back"
+            android:text="@string/ps_preview_title_count"
+            android:textColor="?previewTitleColor"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/ps_btn_ensure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:background="?sendBg"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_6"
+            android:text="@string/ps_ensure"
+            android:textColor="@color/ps_send_color"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/ps_layout_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_alignParentBottom="true"
+        android:background="?previewBottomBg">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="?bottomDivider" />
+
+        <TextView
+            android:id="@+id/ps_tv_original_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:drawableLeft="@drawable/ps_ic_radio_transparent"
+            android:drawablePadding="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:paddingRight="@dimen/dp_12"
+            android:text="@string/ps_original_image"
+            android:textColor="?bottomTextColor"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/ps_tv_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:drawableLeft="@drawable/ps_ic_radio_transparent"
+            android:drawablePadding="@dimen/dp_8"
+            android:gravity="center_vertical"
+            android:paddingRight="@dimen/dp_12"
+            android:text="@string/ps_choose"
+            android:textColor="?bottomTextColor"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ps_chose_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ps_layout_bottom"
+        android:background="?previewBottomBg"
+        android:overScrollMode="never"
+        android:visibility="gone" />
+
+</RelativeLayout>

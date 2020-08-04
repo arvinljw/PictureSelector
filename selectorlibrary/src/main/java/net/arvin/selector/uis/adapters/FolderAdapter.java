@@ -1,96 +1,78 @@
 package net.arvin.selector.uis.adapters;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import net.arvin.selector.R;
-import net.arvin.selector.data.ConstantData;
-import net.arvin.selector.entities.FileEntity;
-import net.arvin.selector.entities.FolderEntity;
-import net.arvin.selector.listeners.OnItemClickListener;
-import net.arvin.selector.listeners.OnItemSelectListener;
-import net.arvin.selector.utils.PSGlideUtil;
-import net.arvin.selector.utils.PSScreenUtil;
-import net.arvin.selector.utils.PSToastUtil;
-import net.arvin.selector.utils.PSUtil;
+import net.arvin.selector.SelectorHelper;
+import net.arvin.selector.data.MediaFolder;
 
 import java.util.List;
 
 /**
- * Created by arvinljw on 17/12/25 17:35
+ * Created by arvinljw on 2020/7/19 20:22
  * Function：
  * Desc：
  */
-public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder> {
-    private Context mContext;
-    private List<FolderEntity> mItems;
+public class FolderAdapter extends BaseAdapter<MediaFolder, FolderAdapter.FolderViewHolder> {
 
-    private OnItemClickListener mItemClickListener;
-    private int mCurrPos = 0;
+    private OnAdapterItemClickListener<MediaFolder> callback;
 
-    public FolderAdapter(Context context, List<FolderEntity> items) {
-        this.mContext = context;
-        this.mItems = items;
+    public FolderAdapter(Context context, List<MediaFolder> items) {
+        super(context, items);
+    }
+
+    public void setCallback(OnAdapterItemClickListener<MediaFolder> callback) {
+        this.callback = callback;
+    }
+
+    @NonNull
+    @Override
+    public FolderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new FolderViewHolder(LayoutInflater.from(context).inflate(R.layout.ps_item_media_folder, parent, false));
     }
 
     @Override
-    public FolderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.ps_item_folder, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(final FolderAdapter.ViewHolder holder, int position) {
-        FolderEntity entity = mItems.get(position);
-        holder.mTvName.setText(entity.getFolderName());
-        holder.mTvCount.setText(mContext.getResources().getString(R.string.ps_image_count, entity.getImages().size()));
-        PSGlideUtil.loadImage(mContext, entity.getFirstImagePath(), holder.mImgFirst);
-        holder.mImgSelector.setVisibility(entity.isSelected() ? View.VISIBLE : View.GONE);
-        setListener(holder, position);
-    }
-
-    @Override
-    public int getItemCount() {
-        return mItems.size();
-    }
-
-    private void setListener(final ViewHolder holder, final int pos) {
+    public void onBindViewHolder(@NonNull FolderViewHolder holder, final int position) {
+        final MediaFolder item = items.get(position);
+        holder.setData(item);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mItems.get(mCurrPos).setSelected(false);
-                mItems.get(pos).setSelected(true);
-                mCurrPos = pos;
-                notifyDataSetChanged();
-                if (mItemClickListener != null) {
-                    mItemClickListener.onItemClick(v, pos);
-                }
+                callback.onAdapterItemClicked(v, item, position);
             }
         });
     }
 
-    public void setItemClickListener(OnItemClickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
-    }
+    static class FolderViewHolder extends RecyclerView.ViewHolder {
+        private ImageView imgThumbnail;
+        private ImageView imgSelected;
+        private TextView tvFolderName;
+        private TextView tvFolderItemCount;
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mImgFirst;
-        TextView mTvName;
-        TextView mTvCount;
-        ImageView mImgSelector;
-
-        ViewHolder(View itemView) {
+        public FolderViewHolder(@NonNull View itemView) {
             super(itemView);
-            mImgFirst = itemView.findViewById(R.id.ps_img_first);
-            mImgSelector = itemView.findViewById(R.id.ps_img_selector);
+            imgThumbnail = itemView.findViewById(R.id.ps_img_thumbnail);
+            imgSelected = itemView.findViewById(R.id.ps_img_selected);
+            tvFolderName = itemView.findViewById(R.id.ps_tv_folder_name);
+            tvFolderItemCount = itemView.findViewById(R.id.ps_tv_folder_item_count);
+        }
 
-            mTvName = itemView.findViewById(R.id.ps_tv_folder_name);
-            mTvCount = itemView.findViewById(R.id.ps_tv_folder_count);
+        public void setData(MediaFolder item) {
+            if (item.getCount() > 0) {
+                SelectorHelper.imageEngine.loadImage(imgThumbnail, item.getFirstMedia().getUri());
+            }
+            tvFolderName.setText(item.getBucketName());
+            tvFolderItemCount.setText("（" + item.getCount() + "）");
+            imgSelected.setVisibility(item.isSelected() ? View.VISIBLE : View.GONE);
+
         }
     }
 }

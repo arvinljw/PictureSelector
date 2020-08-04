@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="ps_colorPrimary">#393a3e</color>
-    <color name="ps_colorPrimaryDark">#2f3034</color>
-    <color name="ps_colorAccent">#1aad19</color>
-    <color name="ps_colorAccentHalf">#881aad19</color>
-    <color name="ps_colorAccentEnable">#2a5f2f</color>
+    <color name="ps_primary">#333333</color>
+    <color name="ps_primary_dark">#333333</color>
 
-    <color name="ps_paint_red">#f3341b</color>
-    <color name="ps_paint_yellow">#febc47</color>
-    <color name="ps_paint_green">#1aad19</color>
-    <color name="ps_paint_blue">#178feb</color>
-    <color name="ps_paint_purple">#925aeb</color>
-    <color name="ps_paint_pink">#e826bd</color>
+    <!--title部分-->
+    <color name="ps_title_color">#ffffff</color>
+    <color name="ps_preview_title_color">#D6D6D6</color>
+    <color name="ps_title_bg_color">#4C4C4C</color>
+    <color name="ps_send_text_enable">#ffffff</color>
+    <color name="ps_send_text_disable">#686868</color>
+    <color name="ps_send_bg_enable">#05C161</color>
+    <color name="ps_send_bg_disable">#434343</color>
 
-    <!--color : white-->
-    <color name="ps_white_divider">#1FFFFFFF</color><!--12% 分隔线-->
-    <color name="ps_white_hint">#4DFFFFFF</color><!--30% 提示/禁用-->
-    <color name="ps_white_secondary">#B3FFFFFF</color><!--70% 减淡颜色-->
-    <color name="ps_white_normal">#FFFFFFFF</color><!--100% 正文颜色-->
+    <!--底部暂时没有-->
+    <color name="ps_bottom_bg">#111111</color>
+    <color name="ps_preview_bottom_bg">#E5333333</color>
+    <color name="ps_bottom_divider">#424242</color>
+    <color name="ps_bottom_text_disable_color">#878787</color>
+    <color name="ps_bottom_text_enable_color">#ffffff</color>
+    <color name="ps_bottom_thumbnail_select_color">#05C161</color>
 
-    <!--color : black-->
-    <color name="ps_black_divider">#1F000000</color><!--12% 如上-->
-    <color name="ps_black_hint">#42000000</color><!--26% 如上-->
-    <color name="ps_black_secondary">#8A000000</color><!--57% 如上-->
-    <color name="ps_black_normal">#DE000000</color><!--87% 如上-->
-    <color name="ps_black_87">#212121</color>
+    <color name="ps_list_bg">#333333</color>
+    <color name="ps_item_selected_color">#05C161</color>
+    <color name="ps_item_unselected_color">#ffffff</color>
+    <color name="ps_item_select_text_color">#ffffff</color>
+    <color name="ps_folder_count_color">#777777</color>
+    <color name="ps_folder_divider_color">#404040</color>
 </resources>

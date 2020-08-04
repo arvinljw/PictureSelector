@@ -2,117 +2,137 @@ package net.arvin.selectordemo;
 
 import android.Manifest;
 import android.content.Intent;
-import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.bumptech.glide.Glide;
 
 import net.arvin.selector.SelectorHelper;
-import net.arvin.selector.data.ConstantData;
-import net.arvin.selector.uis.views.GraffitiView;
-import net.arvin.selector.uis.views.photoview.PhotoView;
-import net.arvin.selector.utils.PSGlideUtil;
+import net.arvin.selector.data.Media;
+import net.arvin.selector.data.MediaStorageStrategy;
+import net.arvin.selector.data.MediaType;
+import net.arvin.selector.engines.ImageEngine;
+import net.arvin.selector.utils.MediaScanner;
+import net.arvin.selector.utils.TakePhotoUtil;
+import net.arvin.selectordemo.permission.DefaultResourceProvider;
+import net.arvin.selectordemo.permission.PermissionUtil;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class MainActivity extends BaseActivity {
-    private RadioButton mRbSingleYes;
-    private RadioButton mRbCropYes;
-    private RadioButton mRbCameraYes;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText mEdMaxCount;
+    private PermissionUtil permissionUtil;
+    private ImageEngine imageEngine;
+    private Uri photoUri;
+    private ImageView imgPreview;
 
-    private PhotoView mImage;
-
-    private ArrayList<String> selectedPictures = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mImage = findViewById(R.id.image);
+        initView();
 
-        GraffitiView layoutGraffiti = findViewById(R.id.layout_graffiti);
-        layoutGraffiti.setCanDraw(true);
-        layoutGraffiti.setColor(getResources().getColor(R.color.ps_colorAccent));
+        initImageEngine();
 
-        PSGlideUtil.loadImage(this, R.drawable.ps_icon, mImage);
-
-        mEdMaxCount = findViewById(R.id.ed_max_count);
-        mRbSingleYes = findViewById(R.id.rb_single_yes);
-        mRbCropYes = findViewById(R.id.rb_crop_yes);
-        mRbCameraYes = findViewById(R.id.rb_camera_yes);
-
-        RadioGroup rgSingle = findViewById(R.id.rg_single);
-        final RadioGroup rgCrop = findViewById(R.id.rg_crop);
-        rgSingle.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == R.id.rb_single_no) {
-                    mEdMaxCount.setText("");
-                    mEdMaxCount.setVisibility(View.VISIBLE);
-                    rgCrop.setVisibility(View.GONE);
-                    rgCrop.check(R.id.rb_crop_no);
-                } else {
-                    mEdMaxCount.setVisibility(View.GONE);
-                    rgCrop.setVisibility(View.VISIBLE);
-                }
-            }
-        });
+        initPermissionConfig();
     }
 
-    public void selectPicture(View v) {
-        checkPermission(new CheckPermListener() {
-            @Override
-            public void agreeAllPermission() {
-                if (mRbSingleYes.isChecked()) {
-                    SelectorHelper.selectPicture(MainActivity.this, mRbCropYes.isChecked(),
-                            mRbCameraYes.isChecked(), 1001);
-                } else {
-                    int maxCount;
-                    try {
-                        maxCount = Integer.valueOf(mEdMaxCount.getText().toString().trim());
-                    } catch (Exception e) {
-                        maxCount = 9;
-                    }
-                    SelectorHelper.selectPictures(MainActivity.this, maxCount,
-                            mRbCameraYes.isChecked(), selectedPictures, 1001);
-                }
-
-
-            }
-        }, "需要拍照和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    private void initView() {
+        imgPreview = findViewById(R.id.img_preview);
+        findViewById(R.id.btnChoosePic).setOnClickListener(this);
+        findViewById(R.id.btnTakePhoto).setOnClickListener(this);
     }
 
-    public void takePhoto(View v) {
-        checkPermission(new CheckPermListener() {
+    private void initImageEngine() {
+        imageEngine = new ImageEngine() {
             @Override
-            public void agreeAllPermission() {
-                SelectorHelper.takePhoto(MainActivity.this, mRbCropYes.isChecked(), 1001);
+            public void loadImage(ImageView imageView, Uri uri) {
+                Glide.with(imageView)
+                        .load(uri)
+                        .into(imageView);
             }
-        }, "需要拍照和读取文件权限", Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        };
+        SelectorHelper.init(imageEngine);
+    }
+
+    private void initPermissionConfig() {
+        PermissionUtil.setExtraResourceProvider(new DefaultResourceProvider());
+        permissionUtil = new PermissionUtil.Builder().with(this).build();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == 1001) {
-                ArrayList<String> backPics = data.getStringArrayListExtra(ConstantData.KEY_BACK_PICTURES);
-                if (backPics != null && backPics.size() > 0) {
-                    selectedPictures.clear();
-                    selectedPictures.addAll(backPics);
-                    PSGlideUtil.loadImage(this, backPics.get(0), mImage);
-                }
-            }
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnChoosePic:
+                permissionUtil.request("需要文件读写权限", Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionUtil.RequestPermissionListener() {
+                    @Override
+                    public void callback(boolean granted, boolean isAlwaysDenied) {
+                        if (granted) {
+                            new SelectorHelper.Builder()
+                                    .setChooseSize(9)
+                                    .setMediaType(MediaType.IMAGE)
+                                    .setStyle(R.style.PS_Customer)
+                                    .build()
+                                    .forResult(MainActivity.this, 1001);
+                        }
+                    }
+                });
+                break;
+            case R.id.btnTakePhoto:
+                permissionUtil.request("需要拍照权限", Manifest.permission.CAMERA, new PermissionUtil.RequestPermissionListener() {
+                    @Override
+                    public void callback(boolean granted, boolean isAlwaysDenied) {
+                        if (granted) {
+                            photoUri =
+                                    TakePhotoUtil.takePhoto(MainActivity.this,
+                                    MediaStorageStrategy.publicStrategy("net.arvin.selectordemo.ps.provider", "psdemo"),
+                                    1002);
+                        }
+                    }
+                });
+                break;
         }
     }
 
     @Override
-    protected void backFromSetting() {
-        selectPicture(null);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1001 && data != null) {
+                List<Media> medias = SelectorHelper.getMediaDataFromIntent(data);
+                boolean isOriginalImage = SelectorHelper.getMediaIsOriginalImage(data);
+                Log.d("ljw >>>", "isOriginalImage: " + isOriginalImage);
+                if (medias != null && medias.size() > 0) {
+                    imageEngine.loadImage(imgPreview, medias.get(0).getUri());
+                    for (Media media : medias) {
+                        Log.d("ljw >>>", "onActivityResult: " + media.getUri());
+                    }
+                }
+            } else if (requestCode == 1002) {
+                if (photoUri != null) {
+                    TakePhotoUtil.scanPath(this, TakePhotoUtil.getPhotoPath(), new MediaScanner.ScanCompletedCallback() {
+                        @Override
+                        public void onScanCompleted(String path, final Uri uri) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    imageEngine.loadImage(imgPreview, uri);
+                                }
+                            });
+                        }
+                    });
+                }
+            }
+        }
     }
 }
