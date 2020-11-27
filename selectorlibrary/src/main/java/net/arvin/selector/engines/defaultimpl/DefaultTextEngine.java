@@ -15,9 +15,9 @@ public class DefaultTextEngine implements TextEngine {
 
     @Override
     public String titleAll(Context context, MediaType mediaType) {
-        if (mediaType == MediaType.IMAGE){
+        if (mediaType == MediaType.IMAGE) {
             return context.getResources().getString(R.string.ps_image_all);
-        }else if (mediaType == MediaType.VIDEO){
+        } else if (mediaType == MediaType.VIDEO) {
             return context.getResources().getString(R.string.ps_video_all);
         }
         return context.getResources().getString(R.string.ps_type_all);
@@ -67,5 +67,15 @@ public class DefaultTextEngine implements TextEngine {
     @Override
     public String notFoundVideoPlayer(Context context) {
         return context.getResources().getString(R.string.ps_not_found_video_player);
+    }
+
+    @Override
+    public String deleteTips(Context context) {
+        return context.getString(R.string.ps_edit_delete_tips);
+    }
+
+    @Override
+    public String releaseDeleteTips(Context context) {
+        return context.getString(R.string.ps_edit_release_delete_tips);
     }
 }

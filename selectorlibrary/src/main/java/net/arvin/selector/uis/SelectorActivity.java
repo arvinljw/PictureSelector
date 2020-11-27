@@ -207,7 +207,6 @@ public class SelectorActivity extends AppCompatActivity implements View.OnClickL
         if (medias == null) {
             return;
         }
-        Log.d("ljw >>>", "mediasCallback: " + page);
         MediaFolder currFolder = null;
         for (MediaFolder folder : folders) {
             if (folder.getBucketId() == bucketId) {
@@ -372,6 +371,9 @@ public class SelectorActivity extends AppCompatActivity implements View.OnClickL
     public void onBackPressed() {
         if (folderHelper != null && folderHelper.isOpen()) {
             showHideFolders();
+            return;
+        }
+        if (UiUtil.hasEditFragment(this)) {
             return;
         }
         if (UiUtil.isShowPreviewFragment(this)) {

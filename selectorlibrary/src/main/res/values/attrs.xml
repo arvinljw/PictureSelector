@@ -15,4 +15,11 @@
     <attr name="previewTitleColor" format="color|reference" />
     <attr name="bottomDivider" format="color|reference" />
     <attr name="bottomTextColor" format="color|reference" />
+
+    <declare-styleable name="PaintColorBarLayout">
+        <attr name="barStyle" format="enum">
+            <enum name="painting" value="0" />
+            <enum name="editing" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

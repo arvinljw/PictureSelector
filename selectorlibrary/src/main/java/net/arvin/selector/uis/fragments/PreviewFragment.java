@@ -118,6 +118,7 @@ public class PreviewFragment extends BaseFragment implements View.OnClickListene
 
     private void initListener() {
         findViewById(R.id.ps_img_back).setOnClickListener(this);
+        findViewById(R.id.ps_tv_edit).setOnClickListener(this);
         tvEnsure.setOnClickListener(this);
         tvOriginalImage.setOnClickListener(this);
         tvChoose.setOnClickListener(this);
@@ -270,6 +271,8 @@ public class PreviewFragment extends BaseFragment implements View.OnClickListene
         }
         if (v.getId() == R.id.ps_img_back) {
             UiUtil.hideFragment(getActivity(), this);
+        } else if (v.getId() == R.id.ps_tv_edit) {
+            UiUtil.addEditFragment(getActivity(), adapter.getItems().get(currentPos));
         } else if (v == tvEnsure) {
             ((SelectorActivity) getActivity()).ensure();
         } else if (v == tvChoose) {

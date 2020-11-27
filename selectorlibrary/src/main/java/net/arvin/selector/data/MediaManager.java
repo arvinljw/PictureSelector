@@ -1,11 +1,18 @@
 package net.arvin.selector.data;
 
 import android.app.Activity;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.LongSparseArray;
+
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 import net.arvin.selector.SelectorHelper;
 
@@ -155,8 +162,15 @@ public final class MediaManager {
                 if (activity == null) {
                     return;
                 }
-                Cursor cursor = activity.getContentResolver().query(QUERY_URI, PROJECTION,
-                        getSelection(params, inBucketId), getSelectionArgs(params, inBucketId), getOrder(page));
+
+                Cursor cursor;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    Bundle queryArgs = createSqlQueryBundle(getSelection(params, inBucketId), getSelectionArgs(params, inBucketId), DATE_TAKEN_ORDER_BY, getLimit(page));
+                    cursor = activity.getContentResolver().query(QUERY_URI, PROJECTION, queryArgs, null);
+                } else {
+                    cursor = activity.getContentResolver().query(QUERY_URI, PROJECTION,
+                            getSelection(params, inBucketId), getSelectionArgs(params, inBucketId), getOrderAndLimit(page));
+                }
                 if (cursor == null) {
                     activity.runOnUiThread(new Runnable() {
                         @Override
@@ -251,8 +265,23 @@ public final class MediaManager {
         return folders;
     }
 
-    private static String getOrder(int page) {
-        return DATE_TAKEN_ORDER_BY + " limit " + PAGE_SIZE + " offset " + page * PAGE_SIZE;
+    private static String getOrderAndLimit(int page) {
+        return DATE_TAKEN_ORDER_BY + " limit " + PAGE_SIZE + " offset " + (page * PAGE_SIZE);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.R)
+    private static Bundle createSqlQueryBundle(String selection, String[] selectionArgs,
+                                               String sortOrder, String limit) {
+        Bundle queryArgs = new Bundle();
+        queryArgs.putString(ContentResolver.QUERY_ARG_SQL_SELECTION, selection);
+        queryArgs.putStringArray(ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS, selectionArgs);
+        queryArgs.putString(ContentResolver.QUERY_ARG_SQL_SORT_ORDER, sortOrder);
+        queryArgs.putString(ContentResolver.QUERY_ARG_SQL_LIMIT, limit);
+        return queryArgs;
+    }
+
+    private static String getLimit(int page) {
+        return PAGE_SIZE + " offset " + (page * PAGE_SIZE);
     }
 
     private static Uri getContentUri(long id, String mimeType) {

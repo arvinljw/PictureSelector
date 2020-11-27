@@ -68,6 +68,17 @@
             android:background="?bottomDivider" />
 
         <TextView
+            android:id="@+id/ps_tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/sp_12"
+            android:paddingRight="@dimen/sp_12"
+            android:text="@string/ps_edit"
+            android:textColor="?bottomTextColor"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
             android:id="@+id/ps_tv_original_image"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

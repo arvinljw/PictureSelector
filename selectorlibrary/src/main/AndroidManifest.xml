@@ -4,11 +4,13 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <application android:allowBackup="true">
         <activity
             android:name="net.arvin.selector.uis.SelectorActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/PS.Default" />
+            android:theme="@style/PS.Default"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 </manifest>

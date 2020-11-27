@@ -2,6 +2,7 @@ package net.arvin.selector.utils;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,19 +32,24 @@ public class TakePhotoUtil {
     private static String photoPath;
 
     public static Uri takePhoto(Activity activity, MediaStorageStrategy storageStrategy, int requestCode) {
-        Intent captureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent captureIntent = getCaptureIntent();
         if (captureIntent.resolveActivity(activity.getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile(activity, storageStrategy);
-            } catch (Exception e) {
-                e.printStackTrace();
+            Uri photoUri;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                photoUri = createImageUri(activity);
+            } else {
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile(activity, storageStrategy);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                if (photoFile == null) {
+                    return null;
+                }
+                photoPath = photoFile.getAbsolutePath();
+                photoUri = FileProvider.getUriForFile(activity, storageStrategy.authority, photoFile);
             }
-            if (photoFile == null) {
-                return null;
-            }
-            photoPath = photoFile.getAbsolutePath();
-            Uri photoUri = FileProvider.getUriForFile(activity, storageStrategy.authority, photoFile);
             captureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
             captureIntent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
@@ -59,6 +65,20 @@ public class TakePhotoUtil {
             return photoUri;
         }
         return null;
+    }
+
+    private static Uri createImageUri(Activity activity) {
+        String status = Environment.getExternalStorageState();
+        // 判断是否有SD卡,优先使用SD卡存储,当没有SD卡时使用手机存储
+        if (status.equals(Environment.MEDIA_MOUNTED)) {
+            return activity.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new ContentValues());
+        } else {
+            return activity.getContentResolver().insert(MediaStore.Images.Media.INTERNAL_CONTENT_URI, new ContentValues());
+        }
+    }
+
+    private static Intent getCaptureIntent() {
+        return new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
     }
 
     private static File createImageFile(Context context, MediaStorageStrategy storageStrategy) {
@@ -90,8 +110,12 @@ public class TakePhotoUtil {
         return photoPath;
     }
 
-    public static void scanPath(Context context, String path, MediaScanner.ScanCompletedCallback callback) {
-        if (path == null) {
+    public static void scanPath(Context context, Uri photoUri, String path, MediaScanner.ScanCompletedCallback callback) {
+        if (path == null && photoUri == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            callback.onScanCompleted(path, photoUri);
             return;
         }
         boolean isApplication = context instanceof Application;

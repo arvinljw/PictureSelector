@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <net.arvin.selector.uis.widgets.editable.EditableView
+        android:id="@+id/ps_editable_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black" />
+
+    <net.arvin.selector.uis.widgets.editable.CropRotateView
+        android:id="@+id/ps_ed_crop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/ps_img_close_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:padding="@dimen/dp_16"
+        android:src="@drawable/ps_edit_ic_back" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/ps_v_anchor"
+        android:layout_alignBottom="@id/ps_v_anchor_bottom"
+        android:background="@drawable/ps_tools_bg" />
+
+    <RelativeLayout
+        android:id="@+id/ps_layout_tools_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/ps_img_pencil"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp_24"
+            android:paddingRight="@dimen/dp_24"
+            android:src="@drawable/ps_ic_pencil" />
+
+        <ImageView
+            android:id="@+id/ps_img_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/ps_img_pencil"
+            android:paddingLeft="@dimen/dp_24"
+            android:paddingRight="@dimen/dp_24"
+            android:src="@drawable/ps_ic_text" />
+
+        <ImageView
+            android:id="@+id/ps_img_resize"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/ps_img_text"
+            android:paddingLeft="@dimen/dp_24"
+            android:paddingRight="@dimen/dp_24"
+            android:src="@drawable/ps_ic_resize" />
+
+        <TextView
+            android:id="@+id/ps_btn_ensure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp_12"
+            android:background="?sendBg"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_6"
+            android:text="@string/ps_edit_over"
+            android:textColor="@color/ps_send_color"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/ps_v_anchor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_above="@id/ps_layout_tools_bar"
+        android:layout_alignTop="@id/ps_layout_paint_color_bar" />
+
+    <View
+        android:id="@+id/ps_v_anchor_bottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true" />
+
+    <LinearLayout
+        android:id="@+id/ps_layout_paint_color_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ps_layout_tools_bar"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ps_img_paint_rollback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/dp_12"
+            android:padding="@dimen/dp_12"
+            android:src="@drawable/ps_ic_rollback" />
+
+        <net.arvin.selector.uis.widgets.editable.PaintColorBarLayout
+            android:id="@+id/ps_paint_color_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_12"
+            app:barStyle="painting" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ps_layout_resize_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_56"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/ps_tv_cancel_resize"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_24"
+            android:paddingRight="@dimen/dp_12"
+            android:text="@string/ps_edit_cancel"
+            android:textColor="@color/ps_paint_edit_delete_text_color"
+            android:textSize="@dimen/sp_16" />
+
+        <ImageView
+            android:id="@+id/ps_img_reset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_16"
+            android:src="@drawable/ps_ic_reset" />
+
+        <ImageView
+            android:id="@+id/ps_img_rotate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingTop="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_16"
+            android:src="@drawable/ps_ic_rotate" />
+
+        <TextView
+            android:id="@+id/ps_btn_resize_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_12"
+            android:background="?sendBg"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_6"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_6"
+            android:text="@string/ps_resize_over"
+            android:textColor="@color/ps_send_color"
+            android:textSize="@dimen/sp_14" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/ps_layout_delete_rect"
+        android:layout_width="@dimen/ps_delete_width"
+        android:layout_height="@dimen/ps_delete_height"
+        android:layout_alignBottom="@id/ps_editable_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_16"
+        android:background="@drawable/ps_delete_bg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/ps_tv_delete_rect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableTop="@drawable/ps_ic_delete"
+            android:drawablePadding="@dimen/dp_12"
+            android:gravity="center"
+            android:text="@string/ps_edit_delete_tips"
+            android:textColor="@color/ps_paint_edit_delete_text_color"
+            android:textSize="@dimen/sp_14" />
+
+    </FrameLayout>
+
+    <net.arvin.selector.uis.widgets.editable.InputTextLayout
+        android:id="@+id/ps_layout_input"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

@@ -9,14 +9,12 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.chrisbanes.photoview.OnPhotoTapListener;
-import com.github.chrisbanes.photoview.PhotoView;
-
 import net.arvin.selector.R;
 import net.arvin.selector.SelectorHelper;
 import net.arvin.selector.data.Media;
 import net.arvin.selector.data.MediaManager;
 import net.arvin.selector.data.MediaType;
+import net.arvin.selector.uis.widgets.photoview.PhotoView;
 import net.arvin.selector.utils.PSUtil;
 
 import java.util.List;

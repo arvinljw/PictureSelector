@@ -26,4 +26,18 @@
     <color name="ps_item_select_text_color">#ffffff</color>
     <color name="ps_folder_count_color">#777777</color>
     <color name="ps_folder_divider_color">#404040</color>
+
+    <color name="ps_paint_color_bar_white">#ffffff</color>
+    <color name="ps_paint_color_bar_black">#000000</color>
+    <color name="ps_paint_color_bar_red">#F53310</color>
+    <color name="ps_paint_color_bar_yellow">#FFBB48</color>
+    <color name="ps_paint_color_bar_green">#02B108</color>
+    <color name="ps_paint_color_bar_blue">#177BFE</color>
+    <color name="ps_paint_color_bar_purple">#9359FD</color>
+
+    <color name="ps_paint_edit_delete_text_color">#ffffff</color>
+    <color name="ps_paint_edit_delete_color">#131415</color>
+    <color name="ps_paint_edit_delete_selected_color">#DC4B4A</color>
+    <color name="ps_tools_bg_start">#44000000</color>
+    <color name="ps_tools_bg_end">#00000000</color>
 </resources>

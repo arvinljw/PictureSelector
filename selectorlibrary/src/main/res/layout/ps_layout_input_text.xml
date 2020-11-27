@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="#88000000">
+
+    <TextView
+        android:id="@+id/ps_input_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_16"
+        android:text="@string/ps_edit_cancel"
+        android:textColor="?bottomTextColor"
+        android:textSize="@dimen/sp_16" />
+
+    <TextView
+        android:id="@+id/ps_input_ensure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:background="?sendBg"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingTop="@dimen/dp_6"
+        android:paddingRight="@dimen/dp_16"
+        android:paddingBottom="@dimen/dp_6"
+        android:text="@string/ps_edit_over"
+        android:textColor="@color/ps_send_color"
+        android:textSize="@dimen/sp_14" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ps_layout_color_bar"
+        android:layout_alignParentTop="true">
+
+        <net.arvin.selector.uis.widgets.editable.SpecialBgEditText
+            android:id="@+id/ps_ed_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@null"
+            android:maxLength="100"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingTop="@dimen/dp_12"
+            android:paddingRight="@dimen/dp_16"
+            android:paddingBottom="@dimen/dp_12"
+            android:textColor="@color/ps_paint_color_bar_white"
+            android:textSize="@dimen/sp_28" />
+
+    </FrameLayout>
+
+    <View
+        android:id="@+id/ps_v_anchor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true" />
+
+    <RelativeLayout
+        android:id="@+id/ps_layout_color_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/ps_v_anchor">
+
+        <ImageView
+            android:id="@+id/ps_img_text_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp_16"
+            android:src="@drawable/ps_ic_text_bg" />
+
+        <View
+            android:layout_width="@dimen/dp_1"
+            android:layout_height="@dimen/dp_20"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/ps_img_text_bg"
+            android:background="@color/ps_paint_color_bar_white" />
+
+        <net.arvin.selector.uis.widgets.editable.PaintColorBarLayout
+            android:id="@+id/ps_paint_color_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_64"
+            app:barStyle="editing" />
+
+    </RelativeLayout>
+
+</merge>

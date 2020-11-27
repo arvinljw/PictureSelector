@@ -1,11 +1,13 @@
 package net.arvin.selectordemo.permission;
 
+import net.arvin.permissionhelper.PermissionUtil;
+
 /**
  * Created by arvinljw on 2020/7/17 15:11
  * Function：
  * Desc：
  */
-public class DefaultResourceProvider implements PermissionUtil.ExtraResourceProvider {
+public class DefaultResourceProvider implements PermissionUtil.IPermissionTextProvider {
     @Override
     public String getEnsureBtnText() {
         return "确定";

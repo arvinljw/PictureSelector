@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
  * Desc：
  */
 public abstract class BaseFragment extends Fragment {
-    private View root;
+    protected View root;
 
     @Nullable
     @Override

@@ -29,4 +29,8 @@ public interface TextEngine {
     String currentMonth(Context context);
 
     String notFoundVideoPlayer(Context context);
+
+    String deleteTips(Context context);
+
+    String releaseDeleteTips(Context context);
 }

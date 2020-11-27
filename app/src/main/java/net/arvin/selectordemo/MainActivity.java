@@ -6,15 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import net.arvin.permissionhelper.PermissionUtil;
 import net.arvin.selector.SelectorHelper;
 import net.arvin.selector.data.Media;
 import net.arvin.selector.data.MediaStorageStrategy;
@@ -23,7 +22,6 @@ import net.arvin.selector.engines.ImageEngine;
 import net.arvin.selector.utils.MediaScanner;
 import net.arvin.selector.utils.TakePhotoUtil;
 import net.arvin.selectordemo.permission.DefaultResourceProvider;
-import net.arvin.selectordemo.permission.PermissionUtil;
 
 import java.util.List;
 
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initPermissionConfig() {
-        PermissionUtil.setExtraResourceProvider(new DefaultResourceProvider());
+        PermissionUtil.setPermissionTextProvider(new DefaultResourceProvider());
         permissionUtil = new PermissionUtil.Builder().with(this).build();
     }
 
@@ -93,8 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void callback(boolean granted, boolean isAlwaysDenied) {
                         if (granted) {
-                            photoUri =
-                                    TakePhotoUtil.takePhoto(MainActivity.this,
+                            photoUri = TakePhotoUtil.takePhoto(MainActivity.this,
                                     MediaStorageStrategy.publicStrategy("net.arvin.selectordemo.ps.provider", "psdemo"),
                                     1002);
                         }
@@ -120,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             } else if (requestCode == 1002) {
                 if (photoUri != null) {
-                    TakePhotoUtil.scanPath(this, TakePhotoUtil.getPhotoPath(), new MediaScanner.ScanCompletedCallback() {
+                    TakePhotoUtil.scanPath(this, photoUri, TakePhotoUtil.getPhotoPath(), new MediaScanner.ScanCompletedCallback() {
                         @Override
                         public void onScanCompleted(String path, final Uri uri) {
                             runOnUiThread(new Runnable() {
