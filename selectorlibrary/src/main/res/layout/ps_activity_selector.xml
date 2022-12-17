@@ -143,6 +143,7 @@
         android:background="#88000000"
         android:gravity="left"
         android:paddingLeft="@dimen/dp_12"
+        android:visibility="gone"
         android:paddingTop="@dimen/dp_4"
         android:paddingBottom="@dimen/dp_4"
         android:textColor="@android:color/white"

@@ -147,19 +147,18 @@ public class SelectorActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    AnimUtil.fadeHide(tvUseTime);
-                } else if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                    LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-                    if (layoutManager == null) {
-                        return;
-                    }
-                    int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-                    Media media = adapter.getItems().get(firstVisibleItemPosition);
-                    long dateTaken = media.getDateTaken();
-                    tvUseTime.setText(PSUtil.getDate(SelectorActivity.this, dateTaken));
-                    AnimUtil.fadeShow(tvUseTime);
+                LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (layoutManager == null) {
+                    return;
                 }
+                int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+                Media media = adapter.getItems().get(firstVisibleItemPosition);
+                long dateTaken = media.getDateTaken();
+                tvUseTime.setText(PSUtil.getDate(SelectorActivity.this, dateTaken));
+//                AnimUtil.fadeShow(tvUseTime);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    AnimUtil.fadeHide(tvUseTime);
+//                }
             }
         });
 
@@ -233,7 +232,7 @@ public class SelectorActivity extends AppCompatActivity implements View.OnClickL
         } else if (v.getId() == R.id.ps_img_close) {
             onBackPressed();
         } else if (v.getId() == R.id.ps_layout_media_folder) {
-            folderHelper.hide();
+            showHideFolders();
         } else if (v == tvPreview) {
             UiUtil.showPreviewFragment(this, false, 0);
         } else if (v == tvOriginalImage) {
@@ -252,10 +251,10 @@ public class SelectorActivity extends AppCompatActivity implements View.OnClickL
             RecyclerView folderList = findViewById(R.id.ps_media_folder_list);
             folderHelper = new FolderHelper(this, findViewById(R.id.ps_layout_media_folder),
                     folderList, folders);
+            folderHelper.setOnAdapterItemClickListener(this);
         }
         boolean isOpen = !folderHelper.isOpen();
         AnimUtil.rotation(imgArrow, isOpen);
-        folderHelper.setOnAdapterItemClickListener(this);
         if (isOpen) {
             folderHelper.show();
         } else {

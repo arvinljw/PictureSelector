@@ -3,7 +3,8 @@
     package="net.arvin.selectordemo">
 
     <application
-        android:allowBackup="true"
+        android:name=".App"
+        android:allowBackup="false"
         android:icon="@drawable/ps_icon"
         android:label="@string/app_name"
         android:supportsRtl="false"

@@ -75,6 +75,7 @@
             android:paddingLeft="@dimen/sp_12"
             android:paddingRight="@dimen/sp_12"
             android:text="@string/ps_edit"
+            android:visibility="gone"
             android:textColor="?bottomTextColor"
             android:textSize="@dimen/sp_14" />
 

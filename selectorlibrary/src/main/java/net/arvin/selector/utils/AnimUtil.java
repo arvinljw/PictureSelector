@@ -27,6 +27,7 @@ import net.arvin.selector.data.Media;
  */
 public class AnimUtil {
 
+    public static final int DURATION_1000 = 1000;
     public static final int DURATION_500 = 500;
     public static final int DURATION_200 = 200;
     public static final int DURATION_50 = 50;
@@ -122,6 +123,10 @@ public class AnimUtil {
     }
 
     public static void fadeShow(final View view) {
+        Object tag = view.getTag();
+        if (tag instanceof ObjectAnimator) {
+            ((ObjectAnimator) tag).cancel();
+        }
         if (view.getAlpha() == 1) {
             return;
         }
@@ -141,7 +146,7 @@ public class AnimUtil {
                 animator.setInterpolator(new LinearInterpolator());
                 animator.start();
             }
-        }, DURATION_500);
+        }, DURATION_1000);
     }
 
     public static void fadeHideBar(final View view) {
